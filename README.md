@@ -1,6 +1,6 @@
-# 🎈 Blank app template
+# 🎈 DIRAC performance tests
 
-A simple Streamlit app template for you to modify!
+A simple Streamlit app template to visualize several DIRAC performance tests, run in different type of machines.
 
 [![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://blank-app-template.streamlit.app/)
 
@@ -17,3 +17,6 @@ A simple Streamlit app template for you to modify!
    ```
    $ streamlit run streamlit_app.py
    ```
+
+
+The current version does not allow to open this directly in Streamlit. Work is in progress...

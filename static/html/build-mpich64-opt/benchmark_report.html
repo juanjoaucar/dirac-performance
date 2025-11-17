@@ -1,0 +1,1930 @@
+
+<!-- Use bootstrap style -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>DIRAC performance</title>
+<style>
+    body { font-family: Arial, sans-serif; margin: 40px; }
+    .table { border-collapse: collapse; width: 80%;}
+    .table th, .table td { border: 1px solid #ccc; padding: 8px; text-align: center; vertical-align: middle;}
+    .table th { background-color: #f2f2f2; }
+
+    img { 
+        margin: 20px auto; 
+        max-width: 90%;
+        display: block;
+    }
+</style>
+
+</head>
+<body>
+    <h1 class="text-primary">Dirac build performance</h1>
+
+<h3 class="text-primary">Content of files with build info</h3>
+
+<details class="my-1">
+  <summary><strong>setup_command</strong></summary>
+  <pre style="color:#0d6efd; background:#f9f9f9; border:1px solid #ccc; padding:10px; overflow:auto;">./setup --pelib=OFF --exatensor=OFF --pcmsolver=OFF --int64 --mpi --extra-fc-flags="""-O3 -march=native""" --extra-cc-flags="""-O3 -march=native""" --extra-cxx-flags="""-O3 -march=native""" --blas=off --lapack=off --explicit-libs="-L/opt/openblas64/lib -lopenblas" build-mpich64-opt
+</pre>
+</details>
+
+<details class="my-1">
+  <summary><strong>cmake_output</strong></summary>
+  <pre style="color:#0d6efd; background:#f9f9f9; border:1px solid #ccc; padding:10px; overflow:auto;">-- The Fortran compiler identification is GNU 13.3.0
+-- The C compiler identification is GNU 13.3.0
+-- The CXX compiler identification is GNU 13.3.0
+-- Detecting Fortran compiler ABI info
+-- Detecting Fortran compiler ABI info - done
+-- Check for working Fortran compiler: /mpich64-long/bin/mpif90 - skipped
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /mpich64-long/bin/mpicc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /mpich64-long/bin/mpicxx - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Found Python: /opt/venv/bin/python3.12 (found version "3.12.3") found components: Interpreter
+-- MATH_LIB_SEARCH_ORDER set to MKL;ESSL;OPENBLAS;ATLAS;ACML;SYSTEM_NATIVE
+-- Found MPI_C: /mpich64-long/bin/mpicc (found version "4.0")
+-- Found MPI_CXX: /mpich64-long/bin/mpicxx (found version "4.0")
+-- Found MPI_Fortran: /mpich64-long/bin/mpif90 (found version "4.0")
+-- Found MPI: TRUE (found version "4.0")
+-- Found OpenMP_C: -fopenmp (found version "4.5")
+-- Found OpenMP_CXX: -fopenmp (found version "4.5")
+-- Found OpenMP_Fortran: -fopenmp (found version "4.5")
+-- Found OpenMP: TRUE (found version "4.5")
+-- Enable profiling: False
+-- Enable run-time checking: False
+-- Configure-time Linked math libs integer compatibility test ENABLED
+-- Performing compile and run test of blas integer size (can deactivate with -D ENABLE_MATH_INT_TEST=OFF) 
+-- Performing Test blas_test_compiled ...
+-- Performing Test blas_test_compiled - Success
+-- Performing Test blas_test_run
+-- Performing Test blas_test_run - Failed
+-- Test of blas integer size SUCCESS .. blas is integer*8 
+-- We have BLAS-integer*8
+-- Found HDF5: /usr/lib/x86_64-linux-gnu/hdf5/serial/libhdf5.so;/usr/lib/x86_64-linux-gnu/libcrypto.so;/usr/lib/x86_64-linux-gnu/libcurl.so;/usr/lib/x86_64-linux-gnu/libpthread.a;/usr/lib/x86_64-linux-gnu/libsz.so;/usr/lib/x86_64-linux-gnu/libz.so;/usr/lib/x86_64-linux-gnu/libdl.a;/usr/lib/x86_64-linux-gnu/libm.so (found version "1.10.10") found components: C
+-- HFD5 found, enabling HDF5 interface 
+-- HDF5 include directory location: /usr/include/hdf5/serial 
+-- MPI package type: MPICH
+-- Compiling /builds/gfaym/dirac/cmake/custom/test-MPI-compiler-compatibility.F90 ...
+-- Performing Test MPI_COMPILER_MATCHES ...
+-- Performing Test MPI_COMPILER_MATCHES - Success
+-- mpi.mod matches the current MPI compiler, employing 'use mpi' and setting -DUSE_MPI_MOD_F90
+-- Compiling /builds/gfaym/dirac/cmake/custom/test-MPI-itype-compatibility.F90 ...
+-- Performing Test MPI_ITYPE_MATCHES ...
+-- Performing Test MPI_ITYPE_MATCHES - Success
+-- Well, program got compiled with 64-bit integers, but the internal MPI integer compatibility test will be performed inside dirac.x.
+-- Set CDash default timeout for single test set to 1500 seconds. Overwritten by test's TIMEOUT property label and, ultimatively, by pam timeout setting.
+-- Test's 'basis_input_scripted' timeout set to 3600 seconds. Can be overwritten by pam's timeout setting.
+-- Polarizable Continuum Model via PCMSolver DISABLED
+-- Enable ExaTENSOR library: OFF
+-- NOTE: tests for the (e)amfX2C 2e-scalar and spin-orbit picture-change correction module require h5py in your python env!
+-- (e)amfX2C 2e-scalar and spin-orbit picture-change correction module: ON
+-- The XCFun submodule ENABLED
+-- ESR property module: ON
+-- Stieltjes external module DISABLED
+-- KRCC module: ON
+-- Enable compilation of standalone relccsd.x: OFF
+-- OpenRSP library: OFF
+-- LAO properties without connection matrices: ON
+-- Spinfree MCSCF module: ON
+-- srDFT module: ON
+-- Specialized tutorial tests DISABLED
+-- Unit control tests DISABLED
+-- Found HDF5: /usr/lib/x86_64-linux-gnu/hdf5/serial/libhdf5.so;/usr/lib/x86_64-linux-gnu/libcrypto.so;/usr/lib/x86_64-linux-gnu/libcurl.so;/usr/lib/x86_64-linux-gnu/libpthread.a;/usr/lib/x86_64-linux-gnu/libsz.so;/usr/lib/x86_64-linux-gnu/libz.so;/usr/lib/x86_64-linux-gnu/libdl.a;/usr/lib/x86_64-linux-gnu/libm.so (found version "1.10.10") found components: C HL
+-- User name: root
+-- Host name: runner-vu-uzivwu-project-67998188-concurrent-0
+-- Operating system: Linux-6.2.0-32-generic
+-- CMake version: 4.1.2
+-- CMake generator: Unix Makefiles
+-- CMake build type: release
+-- Configuration time: 2025-10-27 22:07:20.203028+00:00
+-- Fortran compiler ID: GNU
+-- Fortran compiler: /mpich64-long/bin/mpif90
+-- Fortran compiler version: GNU 13.3.0
+-- Fortran compiler flags:  -O3 -march=native -g -fcray-pointer -fbacktrace -fno-range-check -DVAR_GFORTRAN -DVAR_MFDS -fallow-argument-mismatch  -fopenmp -fdefault-integer-8 -fno-lto
+-- C compiler ID: GNU
+-- C compiler: /mpich64-long/bin/mpicc
+-- C compiler version: GNU 13.3.0
+-- C compiler flags:  -O3 -march=native -g  -fopenmp -fno-lto
+-- CXX compiler ID: GNU
+-- CXX compiler: /mpich64-long/bin/mpicxx
+-- CXX compiler version: GNU 13.3.0
+-- CXX compiler flags:  -O3 -march=native -g -Wall -Wno-unknown-pragmas -Wno-sign-compare -Woverloaded-virtual -Wwrite-strings -Wno-unused  -fopenmp -fno-lto
+-- Static linking: False
+-- 64-bit integers: True
+-- MPI parallelization: True
+-- MPI launcher: /mpich64-long/bin/mpiexec
+-- Explicit libraries: -L/opt/openblas64/lib -lopenblas
+-- Compile definitions: HAVE_MPI;HAVE_OPENMP;VAR_MPI;VAR_MPI2;USE_MPI_MOD_F90;SYS_LINUX;PRG_DIRAC;INT_STAR8;INSTALL_WRKMEM=64000000;BUILD_GEN1INT;MOD_LAO_REARRANGED;MOD_MCSCF_spinfree;MOD_XAMFI;MOD_ESR;MOD_KRCC;MOD_SRDFT
+-- Exacorr module enabled : OFF
+-- For checking, linked libraries to dirac.x: diracobj;xcfun_fortran_bindings;/builds/gfaym/dirac/build-mpich64-opt/external/xcfun-build/src/libxcfun.a;gen1int_interface;-L/opt/openblas64/lib -lopenblas;laplace;laplace-minimax;qcorr;HDF5::HDF5 
+-- Could NOT find Sphinx (missing: SPHINX_EXECUTABLE) 
+-- Copied DIRAC basis set directories into the build directory
+-- Copied data schema and python utilities into the build directory
+-- Set CDash default timeout for single test set to 1500 seconds. Overwritten by test's TIMEOUT property label and, ultimatively, by pam timeout setting.
+-- Test's 'basis_input_scripted' timeout set to 3600 seconds. Can be overwritten by pam's timeout setting.
+-- Configuring done (3.9s)
+-- Generating done (0.2s)
+-- Build files have been written to: /builds/gfaym/dirac/build-mpich64-opt
+</pre>
+</details>
+
+<details class="my-1">
+  <summary><strong>build_info.h</strong></summary>
+  <pre style="color:#0d6efd; background:#f9f9f9; border:1px solid #ccc; padding:10px; overflow:auto;">#ifndef BUILD_INFO_H_INCLUDED
+#define BUILD_INFO_H_INCLUDED
+
+#define USER_NAME                "root"
+#define HOST_NAME                "runner-vu-uzivwu-project-67998188-concurrent-0"
+#define SYSTEM                   "Linux-6.2.0-32-generic"
+#define CMAKE_VERSION            "4.1.2"
+#define CMAKE_GENERATOR          "Unix Makefiles"
+#define CMAKE_BUILD_TYPE         "release"
+#define CONFIGURATION_TIME       "2025-10-27 22:07:20.203028+00:00"
+
+#define FORTRAN_COMPILER_ID      "GNU"
+#define FORTRAN_COMPILER         "/mpich64-long/bin/mpif90"
+#define FORTRAN_COMPILER_VERSION "13.3.0"
+#define FORTRAN_COMPILER_FLAGS   " -O3 -march=native -g -fcray-pointer -fbacktrace -fno-range-check -DVAR_GFORTRAN -DVAR_MFDS -fallow-argument-mismatch  -fopenmp -fdefault-integer-8 -fno-lto"
+
+#define C_COMPILER_ID            "GNU"
+#define C_COMPILER               "/mpich64-long/bin/mpicc"
+#define C_COMPILER_VERSION       "13.3.0"
+#define C_COMPILER_FLAGS         " -O3 -march=native -g  -fopenmp -fno-lto"
+
+#define CXX_COMPILER_ID          "GNU"
+#define CXX_COMPILER             "/mpich64-long/bin/mpicxx"
+#define CXX_COMPILER_VERSION     "13.3.0"
+#define CXX_COMPILER_FLAGS       " -O3 -march=native -g -Wall -Wno-unknown-pragmas -Wno-sign-compare -Woverloaded-virtual -Wwrite-strings -Wno-unused  -fopenmp -fno-lto"
+
+#define STATIC_LINKING           "False"
+#define ENABLE_64BIT_INTEGERS    "True"
+#define ENABLE_MPI               "True"
+#define MPI_LAUNCHER             "/mpich64-long/bin/mpiexec"
+
+#define MATH_LIBS                "unknown"
+#define ENABLE_BUILTIN_BLAS      "OFF"
+#define ENABLE_BUILTIN_LAPACK    "OFF"
+#define EXPLICIT_LIBS            "-L/opt/openblas64/lib -lopenblas"
+
+#define ENABLE_EXATENSOR         "OFF"
+#define EXATENSOR_REPO           "unknown"
+#define EXATENSOR_CONFIG         "unknown"
+#define EXATENSOR_HASH           "unknown"
+
+#define DEFINITIONS              "HAVE_MPI;HAVE_OPENMP;VAR_MPI;VAR_MPI2;USE_MPI_MOD_F90;SYS_LINUX;PRG_DIRAC;INT_STAR8;INSTALL_WRKMEM=64000000;BUILD_GEN1INT;MOD_LAO_REARRANGED;MOD_MCSCF_spinfree;MOD_XAMFI;MOD_ESR;MOD_KRCC;MOD_SRDFT"
+
+#endif /* BUILD_INFO_H_INCLUDED */
+</pre>
+</details>
+
+<details class="my-1">
+  <summary><strong>CMakeCache.txt</strong></summary>
+  <pre style="color:#0d6efd; background:#f9f9f9; border:1px solid #ccc; padding:10px; overflow:auto;"># This is the CMakeCache file.
+# For build in directory: /builds/gfaym/dirac/build-mpich64-opt
+# It was generated by CMake: /opt/venv/lib/python3.12/site-packages/cmake/data/bin/cmake
+# You can edit this file to change values found and used by cmake.
+# If you do not want to change any of the values, simply exit the editor.
+# If you do want to change a value, simply edit, save, and exit the editor.
+# The syntax for the file is as follows:
+# KEY:TYPE=VALUE
+# KEY is the name of a variable in the cache.
+# TYPE is a hint to GUIs for the type of VALUE, DO NOT EDIT TYPE!.
+# VALUE is the current value for the KEY.
+
+########################
+# EXTERNAL cache entries
+########################
+
+//BLAS found
+BLAS_FOUND:BOOL=
+
+//No help, variable specified on the command line.
+BLAS_LANG:UNINITIALIZED=Fortran
+
+//Name of build on the dashboard
+BUILDNAME:STRING=Linux-x86_64-GNU--release
+
+//Build the testing tree.
+BUILD_TESTING:BOOL=ON
+
+//Path to a program.
+CMAKE_ADDR2LINE:FILEPATH=/usr/bin/addr2line
+
+//Path to a program.
+CMAKE_AR:FILEPATH=/usr/bin/ar
+
+//Choose the type of build, options are: None Debug Release RelWithDebInfo
+// MinSizeRel ...
+CMAKE_BUILD_TYPE:STRING=release
+
+//Enable/Disable color output during build.
+CMAKE_COLOR_MAKEFILE:BOOL=ON
+
+//CXX compiler
+CMAKE_CXX_COMPILER:STRING=/mpich64-long/bin/mpicxx
+
+//A wrapper around 'ar' adding the appropriate '--plugin' option
+// for the GCC compiler
+CMAKE_CXX_COMPILER_AR:FILEPATH=/usr/bin/gcc-ar-13
+
+//A wrapper around 'ranlib' adding the appropriate '--plugin' option
+// for the GCC compiler
+CMAKE_CXX_COMPILER_RANLIB:FILEPATH=/usr/bin/gcc-ranlib-13
+
+//Flags used by the compiler during all builds.
+CMAKE_CXX_FLAGS:STRING= -O3 -march=native -g -Wall -Wno-unknown-pragmas -Wno-sign-compare -Woverloaded-virtual -Wwrite-strings -Wno-unused  -fopenmp -fno-lto
+
+//Flags used by the compiler during debug builds.
+CMAKE_CXX_FLAGS_DEBUG:STRING=-O0 -DDEBUG
+
+//Flags used by the CXX compiler during MINSIZEREL builds.
+CMAKE_CXX_FLAGS_MINSIZEREL:STRING=-Os -DNDEBUG
+
+//Flags used by the compiler during release builds.
+CMAKE_CXX_FLAGS_RELEASE:STRING=-Ofast -march=native -DNDEBUG -Wno-unused
+
+//Flags used by the CXX compiler during RELWITHDEBINFO builds.
+CMAKE_CXX_FLAGS_RELWITHDEBINFO:STRING=-O2 -g -DNDEBUG
+
+//C compiler
+CMAKE_C_COMPILER:STRING=/mpich64-long/bin/mpicc
+
+//A wrapper around 'ar' adding the appropriate '--plugin' option
+// for the GCC compiler
+CMAKE_C_COMPILER_AR:FILEPATH=/usr/bin/gcc-ar-13
+
+//A wrapper around 'ranlib' adding the appropriate '--plugin' option
+// for the GCC compiler
+CMAKE_C_COMPILER_RANLIB:FILEPATH=/usr/bin/gcc-ranlib-13
+
+//Flags used by the compiler during all builds.
+CMAKE_C_FLAGS:STRING= -O3 -march=native -g  -fopenmp -fno-lto
+
+//Flags used by the compiler during debug builds.
+CMAKE_C_FLAGS_DEBUG:STRING=-O0
+
+//Flags used by the C compiler during MINSIZEREL builds.
+CMAKE_C_FLAGS_MINSIZEREL:STRING=-Os -DNDEBUG
+
+//Flags used by the compiler during release builds.
+CMAKE_C_FLAGS_RELEASE:STRING=-O2 -Wno-unused
+
+//Flags used by the C compiler during RELWITHDEBINFO builds.
+CMAKE_C_FLAGS_RELWITHDEBINFO:STRING=-O2 -g -DNDEBUG
+
+//Path to a program.
+CMAKE_DLLTOOL:FILEPATH=CMAKE_DLLTOOL-NOTFOUND
+
+//Flags used by the linker during all build types.
+CMAKE_EXE_LINKER_FLAGS:STRING=
+
+//Flags used by the linker during DEBUG builds.
+CMAKE_EXE_LINKER_FLAGS_DEBUG:STRING=
+
+//Flags used by the linker during MINSIZEREL builds.
+CMAKE_EXE_LINKER_FLAGS_MINSIZEREL:STRING=
+
+//Flags used by the linker during RELEASE builds.
+CMAKE_EXE_LINKER_FLAGS_RELEASE:STRING=
+
+//Flags used by the linker during RELWITHDEBINFO builds.
+CMAKE_EXE_LINKER_FLAGS_RELWITHDEBINFO:STRING=
+
+//Enable/Disable output of compile commands during generation.
+CMAKE_EXPORT_COMPILE_COMMANDS:BOOL=
+
+//Value Computed by CMake.
+CMAKE_FIND_PACKAGE_REDIRECTS_DIR:STATIC=/builds/gfaym/dirac/build-mpich64-opt/CMakeFiles/pkgRedirects
+
+//Fortran compiler
+CMAKE_Fortran_COMPILER:STRING=/mpich64-long/bin/mpif90
+
+//A wrapper around 'ar' adding the appropriate '--plugin' option
+// for the GCC compiler
+CMAKE_Fortran_COMPILER_AR:FILEPATH=/usr/bin/gcc-ar-13
+
+//A wrapper around 'ranlib' adding the appropriate '--plugin' option
+// for the GCC compiler
+CMAKE_Fortran_COMPILER_RANLIB:FILEPATH=/usr/bin/gcc-ranlib-13
+
+//Flags used by the compiler during all builds.
+CMAKE_Fortran_FLAGS:STRING= -O3 -march=native -g -fcray-pointer -fbacktrace -fno-range-check -DVAR_GFORTRAN -DVAR_MFDS -fallow-argument-mismatch  -fopenmp -fdefault-integer-8 -fno-lto
+
+//Flags used by the compiler during debug builds.
+CMAKE_Fortran_FLAGS_DEBUG:STRING= -O3 -march=native -g -fcray-pointer -fbacktrace -fno-range-check -DVAR_GFORTRAN -DVAR_MFDS -fallow-argument-mismatch -O0 -fbounds-check -finit-real=nan -finit-integer=-9999  -finit-logical=true  -Wall
+
+//Flags used by the Fortran compiler during MINSIZEREL builds.
+CMAKE_Fortran_FLAGS_MINSIZEREL:STRING=-Os
+
+//Flags used by the compiler during release builds.
+CMAKE_Fortran_FLAGS_RELEASE:STRING=-O3 -funroll-all-loops -w
+
+//Flags used by the Fortran compiler during RELWITHDEBINFO builds.
+CMAKE_Fortran_FLAGS_RELWITHDEBINFO:STRING=-O2 -g
+
+//Install path prefix, prepended onto install directories.
+CMAKE_INSTALL_PREFIX:PATH=/usr/local
+
+//Path to a program.
+CMAKE_LINKER:FILEPATH=/usr/bin/ld
+
+//Path to a program.
+CMAKE_MAKE_PROGRAM:FILEPATH=/usr/bin/gmake
+
+//Flags used by the linker during the creation of modules during
+// all build types.
+CMAKE_MODULE_LINKER_FLAGS:STRING=
+
+//Flags used by the linker during the creation of modules during
+// DEBUG builds.
+CMAKE_MODULE_LINKER_FLAGS_DEBUG:STRING=
+
+//Flags used by the linker during the creation of modules during
+// MINSIZEREL builds.
+CMAKE_MODULE_LINKER_FLAGS_MINSIZEREL:STRING=
+
+//Flags used by the linker during the creation of modules during
+// RELEASE builds.
+CMAKE_MODULE_LINKER_FLAGS_RELEASE:STRING=
+
+//Flags used by the linker during the creation of modules during
+// RELWITHDEBINFO builds.
+CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO:STRING=
+
+//Path to a program.
+CMAKE_NM:FILEPATH=/usr/bin/nm
+
+//Path to a program.
+CMAKE_OBJCOPY:FILEPATH=/usr/bin/objcopy
+
+//Path to a program.
+CMAKE_OBJDUMP:FILEPATH=/usr/bin/objdump
+
+//Value Computed by CMake
+CMAKE_PROJECT_COMPAT_VERSION:STATIC=
+
+//Value Computed by CMake
+CMAKE_PROJECT_DESCRIPTION:STATIC=
+
+//Value Computed by CMake
+CMAKE_PROJECT_HOMEPAGE_URL:STATIC=
+
+//Value Computed by CMake
+CMAKE_PROJECT_NAME:STATIC=DIRAC
+
+//Path to a program.
+CMAKE_RANLIB:FILEPATH=/usr/bin/ranlib
+
+//Path to a program.
+CMAKE_READELF:FILEPATH=/usr/bin/readelf
+
+//Flags used by the linker during the creation of shared libraries
+// during all build types.
+CMAKE_SHARED_LINKER_FLAGS:STRING=
+
+//Flags used by the linker during the creation of shared libraries
+// during DEBUG builds.
+CMAKE_SHARED_LINKER_FLAGS_DEBUG:STRING=
+
+//Flags used by the linker during the creation of shared libraries
+// during MINSIZEREL builds.
+CMAKE_SHARED_LINKER_FLAGS_MINSIZEREL:STRING=
+
+//Flags used by the linker during the creation of shared libraries
+// during RELEASE builds.
+CMAKE_SHARED_LINKER_FLAGS_RELEASE:STRING=
+
+//Flags used by the linker during the creation of shared libraries
+// during RELWITHDEBINFO builds.
+CMAKE_SHARED_LINKER_FLAGS_RELWITHDEBINFO:STRING=
+
+//If set, runtime paths are not added when installing shared libraries,
+// but are added when building.
+CMAKE_SKIP_INSTALL_RPATH:BOOL=NO
+
+//If set, runtime paths are not added when using shared libraries.
+CMAKE_SKIP_RPATH:BOOL=NO
+
+//Flags used by the archiver during the creation of static libraries
+// during all build types.
+CMAKE_STATIC_LINKER_FLAGS:STRING=
+
+//Flags used by the archiver during the creation of static libraries
+// during DEBUG builds.
+CMAKE_STATIC_LINKER_FLAGS_DEBUG:STRING=
+
+//Flags used by the archiver during the creation of static libraries
+// during MINSIZEREL builds.
+CMAKE_STATIC_LINKER_FLAGS_MINSIZEREL:STRING=
+
+//Flags used by the archiver during the creation of static libraries
+// during RELEASE builds.
+CMAKE_STATIC_LINKER_FLAGS_RELEASE:STRING=
+
+//Flags used by the archiver during the creation of static libraries
+// during RELWITHDEBINFO builds.
+CMAKE_STATIC_LINKER_FLAGS_RELWITHDEBINFO:STRING=
+
+//Path to a program.
+CMAKE_STRIP:FILEPATH=/usr/bin/strip
+
+//Path to a program.
+CMAKE_TAPI:FILEPATH=CMAKE_TAPI-NOTFOUND
+
+//If this value is on, makefiles will be generated without the
+// .SILENT directive, and all commands will be echoed to the console
+// during the make.  This is useful for debugging only. With Visual
+// Studio IDE projects all commands are done without /nologo.
+CMAKE_VERBOSE_MAKEFILE:BOOL=FALSE
+
+//Path to the coverage program that CTest uses for performing coverage
+// inspection
+COVERAGE_COMMAND:FILEPATH=/usr/bin/gcov
+
+//Extra command line flags to pass to the coverage tool
+COVERAGE_EXTRA_FLAGS:STRING=-l
+
+//How many times to retry timed-out CTest submissions.
+CTEST_SUBMIT_RETRY_COUNT:STRING=3
+
+//How long to wait between timed-out CTest submissions.
+CTEST_SUBMIT_RETRY_DELAY:STRING=5
+
+//Set timeout in seconds for every single test
+DART_TESTING_TIMEOUT:STRING=1500
+
+//Value Computed by CMake
+DIRAC_BINARY_DIR:STATIC=/builds/gfaym/dirac/build-mpich64-opt
+
+//Value Computed by CMake
+DIRAC_IS_TOP_LEVEL:STATIC=ON
+
+//Value Computed by CMake
+DIRAC_SOURCE_DIR:STATIC=/builds/gfaym/dirac
+
+//Dot tool for use with Doxygen
+DOXYGEN_DOT_EXECUTABLE:FILEPATH=DOXYGEN_DOT_EXECUTABLE-NOTFOUND
+
+//Doxygen documentation generation tool (https://www.doxygen.nl)
+DOXYGEN_EXECUTABLE:FILEPATH=DOXYGEN_EXECUTABLE-NOTFOUND
+
+//Enable 64-bit integers
+ENABLE_64BIT_INTEGERS:BOOL=True
+
+//No help, variable specified on the command line.
+ENABLE_BLAS:UNINITIALIZED=off
+
+//Enable builtin BLAS implementation (slow)
+ENABLE_BUILTIN_BLAS:BOOL=OFF
+
+//Enable builtin LAPACK implementation (slow)
+ENABLE_BUILTIN_LAPACK:BOOL=OFF
+
+//Enable code coverage
+ENABLE_CODE_COVERAGE:BOOL=False
+
+//ESR property module
+ENABLE_ESR:BOOL=ON
+
+//Enable ExaTENSOR library
+ENABLE_EXATENSOR:BOOL=OFF
+
+//Enable Gen1Int library
+ENABLE_GEN1INT:BOOL=ON
+
+//Enable HDF5
+ENABLE_HDF5:BOOL=ON
+
+//KRCC module
+ENABLE_KRCC:BOOL=ON
+
+//LAO properties without connection matrices
+ENABLE_LAO_REARRANGED:BOOL=ON
+
+//No help, variable specified on the command line.
+ENABLE_LAPACK:UNINITIALIZED=off
+
+//Enable LAPACK diagonalization of real matrices
+ENABLE_LAPACK_QDIAG:BOOL=OFF
+
+//Enable checking of math libs integer size compatibility
+ENABLE_MATH_INT_TEST:BOOL=ON
+
+//Log interesting matrices in matlab format (very verbose!)
+ENABLE_MATLAB_LOG:BOOL=OFF
+
+//Spinfree MCSCF module
+ENABLE_MCSCF_spinfree:BOOL=ON
+
+//Enable MPI parallelization
+ENABLE_MPI:BOOL=True
+
+//Enable static linking with older linkers
+ENABLE_OLD_LINKER:BOOL=OFF
+
+//Enable OpenMP parallelization
+ENABLE_OPENMP:BOOL=True
+
+//Enable OpenRSP
+ENABLE_OPENRSP:BOOL=OFF
+
+//Enable Polarizable Continuum Model through PCMSolver
+ENABLE_PCMSOLVER:BOOL=OFF
+
+//Enable polarizabile embedding library
+ENABLE_PELIB:BOOL=OFF
+
+//Enable profiling
+ENABLE_PROFILING:BOOL=False
+
+//Enable standalone RELCCSD
+ENABLE_RELCCSD_STANDALONE:BOOL=OFF
+
+//Enable run-time checking
+ENABLE_RUNTIMECHECK:BOOL=False
+
+//srDFT module
+ENABLE_SRDFT:BOOL=ON
+
+//Enable static libraries linking
+ENABLE_STATIC_LINKING:BOOL=False
+
+//Enable stieltjes library
+ENABLE_STIELTJES:BOOL=OFF
+
+//Enable tutorials within the test suite
+ENABLE_TUTORIALS:BOOL=OFF
+
+//Enable unit tests
+ENABLE_UNIT_TESTS:BOOL=OFF
+
+//Enable utilities
+ENABLE_UTILITIES:BOOL=ON
+
+//(e)amf 2-electron scalar and spin-orbit picture-change correction
+// module
+ENABLE_XAMFI:BOOL=ON
+
+//Enable XCFun library
+ENABLE_XCFUN:BOOL=ON
+
+//No help, variable specified on the command line.
+EXPLICIT_LIBS:UNINITIALIZED=-L/opt/openblas64/lib -lopenblas
+
+//No help, variable specified on the command line.
+EXTRA_CFLAGS:UNINITIALIZED=-O3 -march=native
+
+//No help, variable specified on the command line.
+EXTRA_CXXFLAGS:UNINITIALIZED=-O3 -march=native
+
+//No help, variable specified on the command line.
+EXTRA_FCFLAGS:UNINITIALIZED=-O3 -march=native
+
+//Path to a program.
+GITCOMMAND:FILEPATH=/usr/bin/git
+
+//Value Computed by CMake
+Gen1Int_BINARY_DIR:STATIC=/builds/gfaym/dirac/build-mpich64-opt/src/gen1int/subtree
+
+//Value Computed by CMake
+Gen1Int_IS_TOP_LEVEL:STATIC=OFF
+
+//Value Computed by CMake
+Gen1Int_SOURCE_DIR:STATIC=/builds/gfaym/dirac/src/gen1int/subtree
+
+//HDF5 C Wrapper compiler.  Used only to detect HDF5 compile flags.
+HDF5_C_COMPILER_EXECUTABLE:FILEPATH=/usr/bin/h5cc
+
+//Path to a library.
+HDF5_C_LIBRARY_crypto:FILEPATH=/usr/lib/x86_64-linux-gnu/libcrypto.so
+
+//Path to a library.
+HDF5_C_LIBRARY_curl:FILEPATH=/usr/lib/x86_64-linux-gnu/libcurl.so
+
+//Path to a library.
+HDF5_C_LIBRARY_dl:FILEPATH=/usr/lib/x86_64-linux-gnu/libdl.a
+
+//Path to a library.
+HDF5_C_LIBRARY_hdf5:FILEPATH=/usr/lib/x86_64-linux-gnu/hdf5/serial/libhdf5.so
+
+//Path to a library.
+HDF5_C_LIBRARY_hdf5_hl:FILEPATH=/usr/lib/x86_64-linux-gnu/hdf5/serial/libhdf5_hl.so
+
+//Path to a library.
+HDF5_C_LIBRARY_m:FILEPATH=/usr/lib/x86_64-linux-gnu/libm.so
+
+//Path to a library.
+HDF5_C_LIBRARY_pthread:FILEPATH=/usr/lib/x86_64-linux-gnu/libpthread.a
+
+//Path to a library.
+HDF5_C_LIBRARY_sz:FILEPATH=/usr/lib/x86_64-linux-gnu/libsz.so
+
+//Path to a library.
+HDF5_C_LIBRARY_z:FILEPATH=/usr/lib/x86_64-linux-gnu/libz.so
+
+//HDF5 file differencing tool.
+HDF5_DIFF_EXECUTABLE:FILEPATH=/usr/bin/h5diff
+
+//The directory containing a CMake configuration file for HDF5.
+HDF5_DIR:PATH=HDF5_DIR-NOTFOUND
+
+//LAPACK found
+LAPACK_FOUND:BOOL=
+
+//No help, variable specified on the command line.
+LAPACK_LANG:UNINITIALIZED=Fortran
+
+//Command to build the project
+MAKECOMMAND:STRING=/opt/venv/lib/python3.12/site-packages/cmake/data/bin/cmake --build . --config "${CTEST_CONFIGURATION_TYPE}"
+
+//Math libraries
+MATH_LIBS:STRING=
+
+//No help, variable specified on the command line.
+MATH_LIB_SEARCH_ORDER:UNINITIALIZED=MKL;ESSL;OPENBLAS;ATLAS;ACML;SYSTEM_NATIVE
+
+//Path to the memory checking command, used for memory error detection.
+MEMORYCHECK_COMMAND:FILEPATH=MEMORYCHECK_COMMAND-NOTFOUND
+
+//File that contains suppressions for the memory checker
+MEMORYCHECK_SUPPRESSIONS_FILE:FILEPATH=
+
+//No help, variable specified on the command line.
+MKL_FLAG:UNINITIALIZED=off
+
+//Executable for running MPI programs.
+MPIEXEC_EXECUTABLE:FILEPATH=/mpich64-long/bin/mpiexec
+
+//Maximum number of processors available to run MPI applications.
+MPIEXEC_MAX_NUMPROCS:STRING=4
+
+//Flag used by MPI to specify the number of processes for mpiexec;
+// the next option will be the number of processes.
+MPIEXEC_NUMPROC_FLAG:STRING=-n
+
+//These flags will be placed after all flags passed to mpiexec.
+MPIEXEC_POSTFLAGS:STRING=
+
+//These flags will be directly before the executable that is being
+// run by mpiexec.
+MPIEXEC_PREFLAGS:STRING=
+
+//MPI CXX additional include directories
+MPI_CXX_ADDITIONAL_INCLUDE_DIRS:STRING=
+
+//MPI compiler for CXX
+MPI_CXX_COMPILER:FILEPATH=/mpich64-long/bin/mpicxx
+
+//MPI CXX compiler wrapper include directories
+MPI_CXX_COMPILER_INCLUDE_DIRS:STRING=
+
+//MPI CXX compilation definitions
+MPI_CXX_COMPILE_DEFINITIONS:STRING=
+
+//MPI CXX compilation flags
+MPI_CXX_COMPILE_OPTIONS:STRING=
+
+//MPI CXX linker flags
+MPI_CXX_LINK_FLAGS:STRING=
+
+//If true, the MPI-2 C++ bindings are disabled using definitions.
+MPI_CXX_SKIP_MPICXX:BOOL=OFF
+
+//MPI C additional include directories
+MPI_C_ADDITIONAL_INCLUDE_DIRS:STRING=
+
+//MPI compiler for C
+MPI_C_COMPILER:FILEPATH=/mpich64-long/bin/mpicc
+
+//MPI C compiler wrapper include directories
+MPI_C_COMPILER_INCLUDE_DIRS:STRING=
+
+//MPI C compilation definitions
+MPI_C_COMPILE_DEFINITIONS:STRING=
+
+//MPI C compilation flags
+MPI_C_COMPILE_OPTIONS:STRING=
+
+//MPI C linker flags
+MPI_C_LINK_FLAGS:STRING=
+
+//MPI Fortran additional include directories
+MPI_Fortran_ADDITIONAL_INCLUDE_DIRS:STRING=
+
+//MPI compiler for Fortran
+MPI_Fortran_COMPILER:FILEPATH=/mpich64-long/bin/mpif90
+
+//MPI Fortran compiler wrapper include directories
+MPI_Fortran_COMPILER_INCLUDE_DIRS:STRING=
+
+//MPI Fortran compilation definitions
+MPI_Fortran_COMPILE_DEFINITIONS:STRING=
+
+//MPI Fortran compilation flags
+MPI_Fortran_COMPILE_OPTIONS:STRING=
+
+//MPI Fortran linker flags
+MPI_Fortran_LINK_FLAGS:STRING=
+
+//CXX compiler flags for OpenMP parallelization
+OpenMP_CXX_FLAGS:STRING=-fopenmp
+
+//CXX compiler libraries for OpenMP parallelization
+OpenMP_CXX_LIB_NAMES:STRING=gomp;pthread
+
+//C compiler flags for OpenMP parallelization
+OpenMP_C_FLAGS:STRING=-fopenmp
+
+//C compiler libraries for OpenMP parallelization
+OpenMP_C_LIB_NAMES:STRING=gomp;pthread
+
+//Fortran compiler flags for OpenMP parallelization
+OpenMP_Fortran_FLAGS:STRING=-fopenmp
+
+//Fortran compiler libraries for OpenMP parallelization
+OpenMP_Fortran_LIB_NAMES:STRING=gomp;pthread
+
+//Path to the gomp library for OpenMP
+OpenMP_gomp_LIBRARY:FILEPATH=/usr/lib/gcc/x86_64-linux-gnu/13/libgomp.so
+
+//Path to the pthread library for OpenMP
+OpenMP_pthread_LIBRARY:FILEPATH=/usr/lib/x86_64-linux-gnu/libpthread.a
+
+//No help, variable specified on the command line.
+PCMSOLVER_ROOT:UNINITIALIZED=
+
+//Arguments to supply to pkg-config
+PKG_CONFIG_ARGN:STRING=
+
+//pkg-config executable
+PKG_CONFIG_EXECUTABLE:FILEPATH=PKG_CONFIG_EXECUTABLE-NOTFOUND
+
+//No help, variable specified on the command line.
+PREPROCESSOR_DEFINITIONS:UNINITIALIZED=
+
+//No help, variable specified on the command line.
+PYTHON_INTERPRETER:UNINITIALIZED=
+
+//Name of the computer/site where compile is being run
+SITE:STRING=runner-vu-uzivwu-project-67998188-concurrent-0
+
+//Sphinx documentation generator
+SPHINX_EXECUTABLE:FILEPATH=SPHINX_EXECUTABLE-NOTFOUND
+
+//The directory containing a CMake configuration file for Sphinx.
+Sphinx_DIR:PATH=Sphinx_DIR-NOTFOUND
+
+//Enable only TALSH component of ExaTENSOR library
+TALSH_ONLY:BOOL=OFF
+
+//Work memory in words
+WORK_MEM_WORDS:STRING=64000000
+
+
+########################
+# INTERNAL cache entries
+########################
+
+//ADVANCED property for variable: CMAKE_ADDR2LINE
+CMAKE_ADDR2LINE-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_AR
+CMAKE_AR-ADVANCED:INTERNAL=1
+//This is the directory where this CMakeCache.txt was created
+CMAKE_CACHEFILE_DIR:INTERNAL=/builds/gfaym/dirac/build-mpich64-opt
+//Major version of cmake used to create the current loaded cache
+CMAKE_CACHE_MAJOR_VERSION:INTERNAL=4
+//Minor version of cmake used to create the current loaded cache
+CMAKE_CACHE_MINOR_VERSION:INTERNAL=1
+//Patch version of cmake used to create the current loaded cache
+CMAKE_CACHE_PATCH_VERSION:INTERNAL=2
+//ADVANCED property for variable: CMAKE_COLOR_MAKEFILE
+CMAKE_COLOR_MAKEFILE-ADVANCED:INTERNAL=1
+//Path to CMake executable.
+CMAKE_COMMAND:INTERNAL=/opt/venv/lib/python3.12/site-packages/cmake/data/bin/cmake
+//Path to cpack program executable.
+CMAKE_CPACK_COMMAND:INTERNAL=/opt/venv/lib/python3.12/site-packages/cmake/data/bin/cpack
+//ADVANCED property for variable: CMAKE_CTEST_COMMAND
+CMAKE_CTEST_COMMAND-ADVANCED:INTERNAL=1
+//Path to ctest program executable.
+CMAKE_CTEST_COMMAND:INTERNAL=/opt/venv/lib/python3.12/site-packages/cmake/data/bin/ctest
+//ADVANCED property for variable: CMAKE_CXX_COMPILER
+CMAKE_CXX_COMPILER-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_CXX_COMPILER_AR
+CMAKE_CXX_COMPILER_AR-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_CXX_COMPILER_RANLIB
+CMAKE_CXX_COMPILER_RANLIB-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_CXX_FLAGS
+CMAKE_CXX_FLAGS-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_CXX_FLAGS_DEBUG
+CMAKE_CXX_FLAGS_DEBUG-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_CXX_FLAGS_MINSIZEREL
+CMAKE_CXX_FLAGS_MINSIZEREL-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_CXX_FLAGS_RELEASE
+CMAKE_CXX_FLAGS_RELEASE-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_CXX_FLAGS_RELWITHDEBINFO
+CMAKE_CXX_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_C_COMPILER
+CMAKE_C_COMPILER-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_C_COMPILER_AR
+CMAKE_C_COMPILER_AR-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_C_COMPILER_RANLIB
+CMAKE_C_COMPILER_RANLIB-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_C_FLAGS
+CMAKE_C_FLAGS-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_C_FLAGS_DEBUG
+CMAKE_C_FLAGS_DEBUG-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_C_FLAGS_MINSIZEREL
+CMAKE_C_FLAGS_MINSIZEREL-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_C_FLAGS_RELEASE
+CMAKE_C_FLAGS_RELEASE-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_C_FLAGS_RELWITHDEBINFO
+CMAKE_C_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_DLLTOOL
+CMAKE_DLLTOOL-ADVANCED:INTERNAL=1
+//Executable file format
+CMAKE_EXECUTABLE_FORMAT:INTERNAL=ELF
+//ADVANCED property for variable: CMAKE_EXE_LINKER_FLAGS
+CMAKE_EXE_LINKER_FLAGS-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_EXE_LINKER_FLAGS_DEBUG
+CMAKE_EXE_LINKER_FLAGS_DEBUG-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_EXE_LINKER_FLAGS_MINSIZEREL
+CMAKE_EXE_LINKER_FLAGS_MINSIZEREL-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_EXE_LINKER_FLAGS_RELEASE
+CMAKE_EXE_LINKER_FLAGS_RELEASE-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_EXE_LINKER_FLAGS_RELWITHDEBINFO
+CMAKE_EXE_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_EXPORT_COMPILE_COMMANDS
+CMAKE_EXPORT_COMPILE_COMMANDS-ADVANCED:INTERNAL=1
+//Name of external makefile project generator.
+CMAKE_EXTRA_GENERATOR:INTERNAL=
+//ADVANCED property for variable: CMAKE_Fortran_COMPILER
+CMAKE_Fortran_COMPILER-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_Fortran_COMPILER_AR
+CMAKE_Fortran_COMPILER_AR-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_Fortran_COMPILER_RANLIB
+CMAKE_Fortran_COMPILER_RANLIB-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_Fortran_FLAGS
+CMAKE_Fortran_FLAGS-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_Fortran_FLAGS_DEBUG
+CMAKE_Fortran_FLAGS_DEBUG-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_Fortran_FLAGS_MINSIZEREL
+CMAKE_Fortran_FLAGS_MINSIZEREL-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_Fortran_FLAGS_RELEASE
+CMAKE_Fortran_FLAGS_RELEASE-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_Fortran_FLAGS_RELWITHDEBINFO
+CMAKE_Fortran_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
+//Name of generator.
+CMAKE_GENERATOR:INTERNAL=Unix Makefiles
+//Generator instance identifier.
+CMAKE_GENERATOR_INSTANCE:INTERNAL=
+//Name of generator platform.
+CMAKE_GENERATOR_PLATFORM:INTERNAL=
+//Name of generator toolset.
+CMAKE_GENERATOR_TOOLSET:INTERNAL=
+//Source directory with the top level CMakeLists.txt file for this
+// project
+CMAKE_HOME_DIRECTORY:INTERNAL=/builds/gfaym/dirac
+//Install .so files without execute permission.
+CMAKE_INSTALL_SO_NO_EXE:INTERNAL=1
+//ADVANCED property for variable: CMAKE_LINKER
+CMAKE_LINKER-ADVANCED:INTERNAL=1
+//Name of CMakeLists files to read
+CMAKE_LIST_FILE_NAME:INTERNAL=CMakeLists.txt
+//ADVANCED property for variable: CMAKE_MAKE_PROGRAM
+CMAKE_MAKE_PROGRAM-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_MODULE_LINKER_FLAGS
+CMAKE_MODULE_LINKER_FLAGS-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_MODULE_LINKER_FLAGS_DEBUG
+CMAKE_MODULE_LINKER_FLAGS_DEBUG-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_MODULE_LINKER_FLAGS_MINSIZEREL
+CMAKE_MODULE_LINKER_FLAGS_MINSIZEREL-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_MODULE_LINKER_FLAGS_RELEASE
+CMAKE_MODULE_LINKER_FLAGS_RELEASE-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO
+CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_NM
+CMAKE_NM-ADVANCED:INTERNAL=1
+//number of local generators
+CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=39
+//ADVANCED property for variable: CMAKE_OBJCOPY
+CMAKE_OBJCOPY-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_OBJDUMP
+CMAKE_OBJDUMP-ADVANCED:INTERNAL=1
+//Platform information initialized
+CMAKE_PLATFORM_INFO_INITIALIZED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_RANLIB
+CMAKE_RANLIB-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_READELF
+CMAKE_READELF-ADVANCED:INTERNAL=1
+//Path to CMake installation.
+CMAKE_ROOT:INTERNAL=/opt/venv/lib/python3.12/site-packages/cmake/data/share/cmake-4.1
+//ADVANCED property for variable: CMAKE_SHARED_LINKER_FLAGS
+CMAKE_SHARED_LINKER_FLAGS-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_SHARED_LINKER_FLAGS_DEBUG
+CMAKE_SHARED_LINKER_FLAGS_DEBUG-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_SHARED_LINKER_FLAGS_MINSIZEREL
+CMAKE_SHARED_LINKER_FLAGS_MINSIZEREL-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_SHARED_LINKER_FLAGS_RELEASE
+CMAKE_SHARED_LINKER_FLAGS_RELEASE-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_SHARED_LINKER_FLAGS_RELWITHDEBINFO
+CMAKE_SHARED_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_SKIP_INSTALL_RPATH
+CMAKE_SKIP_INSTALL_RPATH-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_SKIP_RPATH
+CMAKE_SKIP_RPATH-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_STATIC_LINKER_FLAGS
+CMAKE_STATIC_LINKER_FLAGS-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_STATIC_LINKER_FLAGS_DEBUG
+CMAKE_STATIC_LINKER_FLAGS_DEBUG-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_STATIC_LINKER_FLAGS_MINSIZEREL
+CMAKE_STATIC_LINKER_FLAGS_MINSIZEREL-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_STATIC_LINKER_FLAGS_RELEASE
+CMAKE_STATIC_LINKER_FLAGS_RELEASE-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_STATIC_LINKER_FLAGS_RELWITHDEBINFO
+CMAKE_STATIC_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_STRIP
+CMAKE_STRIP-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_TAPI
+CMAKE_TAPI-ADVANCED:INTERNAL=1
+//uname command
+CMAKE_UNAME:INTERNAL=/usr/bin/uname
+//ADVANCED property for variable: CMAKE_VERBOSE_MAKEFILE
+CMAKE_VERBOSE_MAKEFILE-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: COVERAGE_COMMAND
+COVERAGE_COMMAND-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: COVERAGE_EXTRA_FLAGS
+COVERAGE_EXTRA_FLAGS-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CTEST_SUBMIT_RETRY_COUNT
+CTEST_SUBMIT_RETRY_COUNT-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CTEST_SUBMIT_RETRY_DELAY
+CTEST_SUBMIT_RETRY_DELAY-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: DART_TESTING_TIMEOUT
+DART_TESTING_TIMEOUT-ADVANCED:INTERNAL=1
+//Flag that the default CXX compiler flags have been set.
+DEFAULT_CXX_FLAGS_SET:INTERNAL=ON
+//Flag that the default C compiler flags have been set.
+DEFAULT_C_FLAGS_SET:INTERNAL=ON
+//Flag that the default Fortran compiler flags have been set.
+DEFAULT_Fortran_FLAGS_SET:INTERNAL=ON
+//ADVANCED property for variable: DOXYGEN_DOT_EXECUTABLE
+DOXYGEN_DOT_EXECUTABLE-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: DOXYGEN_EXECUTABLE
+DOXYGEN_EXECUTABLE-ADVANCED:INTERNAL=1
+//Details about finding HDF5
+FIND_PACKAGE_MESSAGE_DETAILS_HDF5:INTERNAL=[/usr/lib/x86_64-linux-gnu/hdf5/serial/libhdf5.so;/usr/lib/x86_64-linux-gnu/libcrypto.so;/usr/lib/x86_64-linux-gnu/libcurl.so;/usr/lib/x86_64-linux-gnu/libpthread.a;/usr/lib/x86_64-linux-gnu/libsz.so;/usr/lib/x86_64-linux-gnu/libz.so;/usr/lib/x86_64-linux-gnu/libdl.a;/usr/lib/x86_64-linux-gnu/libm.so][/usr/lib/x86_64-linux-gnu/hdf5/serial/libhdf5_hl.so][found components: C HL ][v1.10.10()]
+//Details about finding MPI
+FIND_PACKAGE_MESSAGE_DETAILS_MPI:INTERNAL=[TRUE][TRUE][TRUE][ ][v4.0()]
+//Details about finding MPI_C
+FIND_PACKAGE_MESSAGE_DETAILS_MPI_C:INTERNAL=[/mpich64-long/bin/mpicc][TRUE][v4.0()]
+//Details about finding MPI_CXX
+FIND_PACKAGE_MESSAGE_DETAILS_MPI_CXX:INTERNAL=[/mpich64-long/bin/mpicxx][TRUE][v4.0()]
+//Details about finding MPI_Fortran
+FIND_PACKAGE_MESSAGE_DETAILS_MPI_Fortran:INTERNAL=[/mpich64-long/bin/mpif90][TRUE][v4.0()]
+//Details about finding OpenMP
+FIND_PACKAGE_MESSAGE_DETAILS_OpenMP:INTERNAL=[TRUE][TRUE][TRUE][ ][v4.5()]
+//Details about finding OpenMP_C
+FIND_PACKAGE_MESSAGE_DETAILS_OpenMP_C:INTERNAL=[-fopenmp][/usr/lib/gcc/x86_64-linux-gnu/13/libgomp.so][/usr/lib/x86_64-linux-gnu/libpthread.a][v4.5()]
+//Details about finding OpenMP_CXX
+FIND_PACKAGE_MESSAGE_DETAILS_OpenMP_CXX:INTERNAL=[-fopenmp][/usr/lib/gcc/x86_64-linux-gnu/13/libgomp.so][/usr/lib/x86_64-linux-gnu/libpthread.a][v4.5()]
+//Details about finding OpenMP_Fortran
+FIND_PACKAGE_MESSAGE_DETAILS_OpenMP_Fortran:INTERNAL=[-fopenmp][/usr/lib/gcc/x86_64-linux-gnu/13/libgomp.so][/usr/lib/x86_64-linux-gnu/libpthread.a][v4.5()]
+//Details about finding Python
+FIND_PACKAGE_MESSAGE_DETAILS_Python:INTERNAL=[/opt/venv/bin/python3.12][found components: Interpreter ][v3.12.3()]
+//ADVANCED property for variable: GITCOMMAND
+GITCOMMAND-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: HDF5_C_COMPILER_EXECUTABLE
+HDF5_C_COMPILER_EXECUTABLE-ADVANCED:INTERNAL=1
+//Result of TRY_COMPILE
+HDF5_C_COMPILER_NO_INTERROGATE:INTERNAL=FALSE
+//ADVANCED property for variable: HDF5_DIFF_EXECUTABLE
+HDF5_DIFF_EXECUTABLE-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: HDF5_DIR
+HDF5_DIR-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: MAKECOMMAND
+MAKECOMMAND-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: MEMORYCHECK_COMMAND
+MEMORYCHECK_COMMAND-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: MEMORYCHECK_SUPPRESSIONS_FILE
+MEMORYCHECK_SUPPRESSIONS_FILE-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: MPIEXEC_EXECUTABLE
+MPIEXEC_EXECUTABLE-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: MPIEXEC_MAX_NUMPROCS
+MPIEXEC_MAX_NUMPROCS-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: MPIEXEC_NUMPROC_FLAG
+MPIEXEC_NUMPROC_FLAG-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: MPIEXEC_POSTFLAGS
+MPIEXEC_POSTFLAGS-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: MPIEXEC_PREFLAGS
+MPIEXEC_PREFLAGS-ADVANCED:INTERNAL=1
+//Test MPI_COMPILER_MATCHES
+MPI_COMPILER_MATCHES:INTERNAL=1
+//ADVANCED property for variable: MPI_CXX_ADDITIONAL_INCLUDE_DIRS
+MPI_CXX_ADDITIONAL_INCLUDE_DIRS-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: MPI_CXX_COMPILER
+MPI_CXX_COMPILER-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: MPI_CXX_COMPILER_INCLUDE_DIRS
+MPI_CXX_COMPILER_INCLUDE_DIRS-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: MPI_CXX_COMPILE_DEFINITIONS
+MPI_CXX_COMPILE_DEFINITIONS-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: MPI_CXX_COMPILE_OPTIONS
+MPI_CXX_COMPILE_OPTIONS-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: MPI_CXX_LINK_FLAGS
+MPI_CXX_LINK_FLAGS-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: MPI_CXX_SKIP_MPICXX
+MPI_CXX_SKIP_MPICXX-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: MPI_C_ADDITIONAL_INCLUDE_DIRS
+MPI_C_ADDITIONAL_INCLUDE_DIRS-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: MPI_C_COMPILER
+MPI_C_COMPILER-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: MPI_C_COMPILER_INCLUDE_DIRS
+MPI_C_COMPILER_INCLUDE_DIRS-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: MPI_C_COMPILE_DEFINITIONS
+MPI_C_COMPILE_DEFINITIONS-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: MPI_C_COMPILE_OPTIONS
+MPI_C_COMPILE_OPTIONS-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: MPI_C_LINK_FLAGS
+MPI_C_LINK_FLAGS-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: MPI_Fortran_ADDITIONAL_INCLUDE_DIRS
+MPI_Fortran_ADDITIONAL_INCLUDE_DIRS-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: MPI_Fortran_COMPILER
+MPI_Fortran_COMPILER-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: MPI_Fortran_COMPILER_INCLUDE_DIRS
+MPI_Fortran_COMPILER_INCLUDE_DIRS-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: MPI_Fortran_COMPILE_DEFINITIONS
+MPI_Fortran_COMPILE_DEFINITIONS-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: MPI_Fortran_COMPILE_OPTIONS
+MPI_Fortran_COMPILE_OPTIONS-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: MPI_Fortran_LINK_FLAGS
+MPI_Fortran_LINK_FLAGS-ADVANCED:INTERNAL=1
+//Test MPI_ITYPE_MATCHES
+MPI_ITYPE_MATCHES:INTERNAL=1
+//Result of TRY_COMPILE
+MPI_RESULT_CXX_test_mpi_MPICXX:INTERNAL=TRUE
+//Result of TRY_COMPILE
+MPI_RESULT_CXX_test_mpi_normal:INTERNAL=TRUE
+//Result of TRY_COMPILE
+MPI_RESULT_C_test_mpi_normal:INTERNAL=TRUE
+//Result of TRY_COMPILE
+MPI_RESULT_Fortran_mpiver_F90_MODULE:INTERNAL=TRUE
+//Result of TRY_COMPILE
+MPI_RESULT_Fortran_test_mpi_F08_MODULE:INTERNAL=FALSE
+//Result of TRY_COMPILE
+MPI_RESULT_Fortran_test_mpi_F77_HEADER:INTERNAL=TRUE
+//Result of TRY_COMPILE
+MPI_RESULT_Fortran_test_mpi_F90_MODULE:INTERNAL=TRUE
+//Result of TRY_COMPILE
+OpenMP_COMPILE_RESULT_CXX_fopenmp:INTERNAL=TRUE
+//Result of TRY_COMPILE
+OpenMP_COMPILE_RESULT_C_fopenmp:INTERNAL=TRUE
+//Result of TRY_COMPILE
+OpenMP_COMPILE_RESULT_FortranHeader_fopenmp:INTERNAL=TRUE
+//Result of TRY_COMPILE
+OpenMP_COMPILE_RESULT_FortranModule_fopenmp:INTERNAL=TRUE
+//ADVANCED property for variable: OpenMP_CXX_FLAGS
+OpenMP_CXX_FLAGS-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: OpenMP_CXX_LIB_NAMES
+OpenMP_CXX_LIB_NAMES-ADVANCED:INTERNAL=1
+//CXX compiler's OpenMP specification date
+OpenMP_CXX_SPEC_DATE:INTERNAL=201511
+//ADVANCED property for variable: OpenMP_C_FLAGS
+OpenMP_C_FLAGS-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: OpenMP_C_LIB_NAMES
+OpenMP_C_LIB_NAMES-ADVANCED:INTERNAL=1
+//C compiler's OpenMP specification date
+OpenMP_C_SPEC_DATE:INTERNAL=201511
+//ADVANCED property for variable: OpenMP_Fortran_FLAGS
+OpenMP_Fortran_FLAGS-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: OpenMP_Fortran_LIB_NAMES
+OpenMP_Fortran_LIB_NAMES-ADVANCED:INTERNAL=1
+//Fortran compiler's OpenMP specification date
+OpenMP_Fortran_SPEC_DATE:INTERNAL=201511
+//Result of TRY_COMPILE
+OpenMP_SPECTEST_CXX_:INTERNAL=TRUE
+//Result of TRY_COMPILE
+OpenMP_SPECTEST_C_:INTERNAL=TRUE
+//Result of TRY_COMPILE
+OpenMP_SPECTEST_Fortran_:INTERNAL=TRUE
+//ADVANCED property for variable: OpenMP_gomp_LIBRARY
+OpenMP_gomp_LIBRARY-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: OpenMP_pthread_LIBRARY
+OpenMP_pthread_LIBRARY-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: PKG_CONFIG_ARGN
+PKG_CONFIG_ARGN-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: PKG_CONFIG_EXECUTABLE
+PKG_CONFIG_EXECUTABLE-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: SITE
+SITE-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: SPHINX_EXECUTABLE
+SPHINX_EXECUTABLE-ADVANCED:INTERNAL=1
+//Compiler reason failure
+_Python_Compiler_REASON_FAILURE:INTERNAL=
+//Development reason failure
+_Python_Development_REASON_FAILURE:INTERNAL=
+_Python_EXECUTABLE:INTERNAL=/opt/venv/bin/python3.12
+//Python Properties
+_Python_INTERPRETER_PROPERTIES:INTERNAL=Python;3;12;3;64;32;&lt;none&gt;;cpython-312-x86_64-linux-gnu;abi3;/usr/lib/python3.12;/opt/venv/lib/python3.12;/opt/venv/lib/python3.12/site-packages;/opt/venv/lib/python3.12/site-packages
+_Python_INTERPRETER_SIGNATURE:INTERNAL=383de6bb6b1a6f47d1f0db53a1602b1c
+//NumPy reason failure
+_Python_NumPy_REASON_FAILURE:INTERNAL=
+//Test blas_test_compiled
+blas_test_compiled:INTERNAL=1
+//Test blas_test_run
+blas_test_run:INTERNAL=
+//Result of TRY_COMPILE
+blas_test_run_COMPILED:INTERNAL=TRUE
+//Result of try_run()
+blas_test_run_EXITCODE:INTERNAL=FAILED_TO_RUN
+
+</pre>
+</details>
+
+<details class="my-1">
+  <summary><strong>lscpu.txt</strong></summary>
+  <pre style="color:#0d6efd; background:#f9f9f9; border:1px solid #ccc; padding:10px; overflow:auto;">Architecture:                       x86_64
+CPU op-mode(s):                     32-bit, 64-bit
+Address sizes:                      39 bits physical, 48 bits virtual
+Byte Order:                         Little Endian
+CPU(s):                             8
+On-line CPU(s) list:                0-7
+Vendor ID:                          GenuineIntel
+Model name:                         Intel(R) Core(TM) i7-4770 CPU @ 3.40GHz
+CPU family:                         6
+Model:                              60
+Thread(s) per core:                 2
+Core(s) per socket:                 4
+Socket(s):                          1
+Stepping:                           3
+CPU(s) scaling MHz:                 96%
+CPU max MHz:                        3900.0000
+CPU min MHz:                        800.0000
+BogoMIPS:                           6784.58
+Flags:                              fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc cpuid aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 sdbg fma cx16 xtpr pdcm pcid sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm cpuid_fault invpcid_single pti ssbd ibrs ibpb stibp tpr_shadow vnmi flexpriority ept vpid ept_ad fsgsbase tsc_adjust bmi1 avx2 smep bmi2 erms invpcid xsaveopt dtherm ida arat pln pts md_clear flush_l1d
+Virtualization:                     VT-x
+L1d cache:                          128 KiB (4 instances)
+L1i cache:                          128 KiB (4 instances)
+L2 cache:                           1 MiB (4 instances)
+L3 cache:                           8 MiB (1 instance)
+NUMA node(s):                       1
+NUMA node0 CPU(s):                  0-7
+Vulnerability Gather data sampling: Not affected
+Vulnerability Itlb multihit:        KVM: Mitigation: VMX disabled
+Vulnerability L1tf:                 Mitigation; PTE Inversion; VMX conditional cache flushes, SMT vulnerable
+Vulnerability Mds:                  Mitigation; Clear CPU buffers; SMT vulnerable
+Vulnerability Meltdown:             Mitigation; PTI
+Vulnerability Mmio stale data:      Unknown: No mitigations
+Vulnerability Retbleed:             Not affected
+Vulnerability Spec store bypass:    Mitigation; Speculative Store Bypass disabled via prctl
+Vulnerability Spectre v1:           Mitigation; usercopy/swapgs barriers and __user pointer sanitization
+Vulnerability Spectre v2:           Mitigation; Retpolines, IBPB conditional, IBRS_FW, STIBP conditional, RSB filling, PBRSB-eIBRS Not affected
+Vulnerability Srbds:                Mitigation; Microcode
+Vulnerability Tsx async abort:      Not affected
+</pre>
+</details>
+
+
+
+<div class="container my-4">
+  <h3 class="text-primary">Summary Table</h3>
+  <table class="table table-striped table-bordered">
+    <table class="table table-bordered table-hover align-middle" style="border:3px solid #000; border-collapse: collapse;">
+  <thead class='table-light'><tr>
+    <th>Test</th>
+    <th>Description</th>
+    <th>Property</th>
+    <th>N. of Atoms</th>
+    <th>Method</th>
+    <th>Basis Functions</th>
+    <th>Extra Information</th>
+    <th>cores</th>
+    <th>time [s]</th>
+    <th>peak RAM [Mb]</th>
+  </tr></thead>
+  <tbody>
+    <tr>
+      <td rowspan="3">1</td>
+      <td rowspan="3">Energy with X2C(xamfi). Atomic calculation with 224 basis functions.</td>
+      <td rowspan="3">Energy</td>
+      <td rowspan="3">1</td>
+      <td rowspan="3">X2C(xamfi)</td>
+      <td rowspan="3">224</td>
+      <td rowspan="3">---</td>
+      <td>1</td>
+      <td>4.8</td>
+      <td>216.0</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>5.2</td>
+      <td>360.5</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>3.5</td>
+      <td>447.7</td>
+    </tr>
+    <tr>
+      <td rowspan="3">2</td>
+      <td rowspan="3">Energy with X2C(xamfi). Atomic calculation with 612 basis functions.</td>
+      <td rowspan="3">Energy</td>
+      <td rowspan="3">1</td>
+      <td rowspan="3">X2C(xamfi)</td>
+      <td rowspan="3">612</td>
+      <td rowspan="3">---</td>
+      <td>1</td>
+      <td>180.6</td>
+      <td>389.7</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>180.9</td>
+      <td>468.5</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>101.5</td>
+      <td>730.4</td>
+    </tr>
+    <tr>
+      <td rowspan="3">3</td>
+      <td rowspan="3">Energy with X2C(xamfi). Molecular calculation with 252 basis functions.</td>
+      <td rowspan="3">Energy</td>
+      <td rowspan="3">2</td>
+      <td rowspan="3">X2C(xamfi)</td>
+      <td rowspan="3">252</td>
+      <td rowspan="3">---</td>
+      <td>1</td>
+      <td>60.4</td>
+      <td>400.0</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>60.4</td>
+      <td>468.6</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>27.5</td>
+      <td>649.6</td>
+    </tr>
+    <tr>
+      <td rowspan="3">4</td>
+      <td rowspan="3">Energy with X2C(xamfi)-CCSD. Molecular calculation with 252 basis functions. 122 spinors in active space.</td>
+      <td rowspan="3">Energy</td>
+      <td rowspan="3">2</td>
+      <td rowspan="3">X2C(xamfi)-CCSD</td>
+      <td rowspan="3">252</td>
+      <td rowspan="3">122 spinors in active space.</td>
+      <td>1</td>
+      <td>212.9</td>
+      <td>596.2</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>180.6</td>
+      <td>1154.4</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>166.1</td>
+      <td>2241.7</td>
+    </tr>
+    <tr>
+      <td rowspan="3">5</td>
+      <td rowspan="3">Energy with DHF. Molecular calculation with X basis functions.</td>
+      <td rowspan="3">Energy</td>
+      <td rowspan="3">2</td>
+      <td rowspan="3">DHF</td>
+      <td rowspan="3">X</td>
+      <td rowspan="3">---</td>
+      <td>1</td>
+      <td>345.2</td>
+      <td>129.5</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>338.1</td>
+      <td>188.6</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>168.9</td>
+      <td>326.5</td>
+    </tr>
+    <tr style="border-top:3px double #0d6efd;">
+      <td rowspan="3">6</td>
+      <td rowspan="3">EFG with DHF. Molecular calculation with X basis functions.</td>
+      <td rowspan="3">EFG</td>
+      <td rowspan="3">5</td>
+      <td rowspan="3">DHF</td>
+      <td rowspan="3">X</td>
+      <td rowspan="3">---</td>
+      <td>1</td>
+      <td>303.3</td>
+      <td>160.6</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>292.9</td>
+      <td>228.7</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>138.4</td>
+      <td>357.6</td>
+    </tr>
+    <tr>
+      <td rowspan="3">7</td>
+      <td rowspan="3">EFG with CCSD. Molecular calculation with X basis functions. XXX spinors in active space.</td>
+      <td rowspan="3">EFG</td>
+      <td rowspan="3">2</td>
+      <td rowspan="3">CCSD</td>
+      <td rowspan="3">X</td>
+      <td rowspan="3">XXX spinors in active space.</td>
+      <td>1</td>
+      <td>622.5</td>
+      <td>1105.9</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>621.3</td>
+      <td>2207.5</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>538.0</td>
+      <td>4373.8</td>
+    </tr>
+    <tr style="border-top:3px double #0d6efd;">
+      <td rowspan="3">8</td>
+      <td rowspan="3">Shielding with DHF. London orbitals. Molecular calculation with X basis functions.</td>
+      <td rowspan="3">Shielding</td>
+      <td rowspan="3">2</td>
+      <td rowspan="3">DHF</td>
+      <td rowspan="3">X</td>
+      <td rowspan="3">---</td>
+      <td>1</td>
+      <td>108.8</td>
+      <td>195.9</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>110.2</td>
+      <td>254.5</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>61.6</td>
+      <td>402.9</td>
+    </tr>
+    <tr style="border-top:3px double #0d6efd;">
+      <td rowspan="3">9</td>
+      <td rowspan="3">PVC to EFG with DHF. Molecular calculation with X basis functions.</td>
+      <td rowspan="3">PVC to EFG</td>
+      <td rowspan="3">4</td>
+      <td rowspan="3">DHF</td>
+      <td rowspan="3">X</td>
+      <td rowspan="3">---</td>
+      <td>1</td>
+      <td>249.9</td>
+      <td>117.7</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>250.3</td>
+      <td>178.3</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>107.0</td>
+      <td>300.2</td>
+    </tr>
+  </tbody>
+</table>
+
+  </table>
+</div>
+
+<div class="container my-4">
+    <h3 class="text-primary">Plots</h3>
+    <div class='container'>
+<div class="card my-4 p-3 shadow-sm border rounded">
+
+<details class="my-1">
+  <summary><strong>Test-1.mol</strong></summary>
+  <pre style="color:#0d6efd; background:#f9f9f9; border:1px solid #ccc; padding:10px; overflow:auto;">DIRAC
+
+
+C   1    0
+      009.    1
+X1      0.0000000000        0.0000000000        0.0000000000
+LARGE BASIS dyall.cv3z
+FINISH</pre>
+</details>
+
+<details class="my-1">
+  <summary><strong>Test-1.inp</strong></summary>
+  <pre style="color:#0d6efd; background:#f9f9f9; border:1px solid #ccc; padding:10px; overflow:auto;">**DIRAC
+.WAVE FUNCTION
+**INTEGRAL
+**HAMILTONIAN
+.X2Cmmf
+.DOSSSS
+*X-AMFI
+.EAMF
+**WAVE FUNCTION
+.SCF
+*SCF
+.CLOSED SHELL
+4
+.OPEN SHELL
+1
+5/6
+**END OF</pre>
+</details>
+<div class='row'>
+<div class="col-md-6 text-center">
+        <img src="1.png" class="img-fluid rounded shadow my-3" alt="1.png">
+    </div>
+<div class="col-md-6 text-center">
+        <img src="1_ram_vs_time.png" class="img-fluid rounded shadow my-3" alt="1_ram_vs_time.png">
+    </div>
+</div>
+</div>
+<div class="card my-4 p-3 shadow-sm border rounded">
+
+<details class="my-1">
+  <summary><strong>Test-2.mol</strong></summary>
+  <pre style="color:#0d6efd; background:#f9f9f9; border:1px solid #ccc; padding:10px; overflow:auto;">DIRAC
+
+
+C   1    0
+      035.    1
+X1      0.0000000000        0.0000000000        0.0000000000
+LARGE BASIS dyall.cv3z
+FINISH</pre>
+</details>
+
+<details class="my-1">
+  <summary><strong>Test-2.inp</strong></summary>
+  <pre style="color:#0d6efd; background:#f9f9f9; border:1px solid #ccc; padding:10px; overflow:auto;">**DIRAC
+.WAVE FUNCTION
+**INTEGRAL
+**HAMILTONIAN
+.X2Cmmf
+.DOSSSS
+*X-AMFI
+.EAMF
+**WAVE FUNCTION
+.SCF
+*SCF
+.CLOSED SHELL
+30
+.OPEN SHELL
+1
+5/6
+**END OF</pre>
+</details>
+<div class='row'>
+<div class="col-md-6 text-center">
+        <img src="2.png" class="img-fluid rounded shadow my-3" alt="2.png">
+    </div>
+<div class="col-md-6 text-center">
+        <img src="2_ram_vs_time.png" class="img-fluid rounded shadow my-3" alt="2_ram_vs_time.png">
+    </div>
+</div>
+</div>
+<div class="card my-4 p-3 shadow-sm border rounded">
+
+<details class="my-1">
+  <summary><strong>Test-3.mol</strong></summary>
+  <pre style="color:#0d6efd; background:#f9f9f9; border:1px solid #ccc; padding:10px; overflow:auto;">Molecule file for FBr
+
+
+C   2    2 Y X     A
+        9.    1
+F     0.0000000000   0.0000000000   0.0000000000
+LARGE BASIS dyall.cv3z
+       35.    1
+Br    0.0000000000   0.0000000000   1.7148710000
+LARGE BASIS dyall.cv3z
+FINISH
+</pre>
+</details>
+
+<details class="my-1">
+  <summary><strong>Test-3.inp</strong></summary>
+  <pre style="color:#0d6efd; background:#f9f9f9; border:1px solid #ccc; padding:10px; overflow:auto;">**DIRAC 
+.WAVE FUNCTION
+.PROPERTIES
+**INTEGRAL
+*READIN
+.UNCONTRACTED
+**HAMILTONIAN
+.DOSSSS
+.X2C
+*X-AMFI
+.EAMF
+**WAVE FUNCTION
+.SCF
+*SCF
+.ERGCNV
+5.0E-9
+.MAXITR
+100
+**PROPERTIES
+.EFG
+.NQCC
+**END OF 
+</pre>
+</details>
+<div class='row'>
+<div class="col-md-6 text-center">
+        <img src="3.png" class="img-fluid rounded shadow my-3" alt="3.png">
+    </div>
+<div class="col-md-6 text-center">
+        <img src="3_ram_vs_time.png" class="img-fluid rounded shadow my-3" alt="3_ram_vs_time.png">
+    </div>
+</div>
+</div>
+<div class="card my-4 p-3 shadow-sm border rounded">
+
+<details class="my-1">
+  <summary><strong>Test-4.mol</strong></summary>
+  <pre style="color:#0d6efd; background:#f9f9f9; border:1px solid #ccc; padding:10px; overflow:auto;">Molecule file for FBr
+
+
+C   2    2 Y X     A
+        9.    1
+F     0.0000000000   0.0000000000   0.0000000000
+LARGE BASIS dyall.cv3z
+       35.    1
+Br    0.0000000000   0.0000000000   1.7148710000
+LARGE BASIS dyall.cv3z
+FINISH
+</pre>
+</details>
+
+<details class="my-1">
+  <summary><strong>Test-4.inp</strong></summary>
+  <pre style="color:#0d6efd; background:#f9f9f9; border:1px solid #ccc; padding:10px; overflow:auto;">**DIRAC 
+.WAVE FUNCTION
+.PROPERTIES
+.4INDEX
+**INTEGRAL
+*READIN
+.UNCONTRACTED
+**HAMILTONIAN
+.DOSSSS
+.X2C
+*X-AMFI
+.EAMF
+**WAVE FUNCTION
+.SCF
+.RELCCSD
+*SCF
+.ERGCNV
+5.0E-9
+.MAXITR
+100
+**PROPERTIES
+.EFG
+.NQCC
+**RELCCSD
+.ENERGY
+.GRADIE
+*CCENER
+.NOMP2
+.NOSDT  # without triplets
+*CCFOPR
+.CCSDG
+#.CCSDTG # not implemented yet
+**MOLTRA
+.ACTIVE
+energy -500 5 0.01
+**END OF 
+</pre>
+</details>
+<div class='row'>
+<div class="col-md-6 text-center">
+        <img src="4.png" class="img-fluid rounded shadow my-3" alt="4.png">
+    </div>
+<div class="col-md-6 text-center">
+        <img src="4_ram_vs_time.png" class="img-fluid rounded shadow my-3" alt="4_ram_vs_time.png">
+    </div>
+</div>
+</div>
+<div class="card my-4 p-3 shadow-sm border rounded">
+
+<details class="my-1">
+  <summary><strong>Test-5.mol</strong></summary>
+  <pre style="color:#0d6efd; background:#f9f9f9; border:1px solid #ccc; padding:10px; overflow:auto;">Molecule file for FI
+Arbitrary geometry
+
+C   2    2 Y X     A
+        9.    1
+F     0.0000000000   0.0000000000   0.0000000000
+LARGE BASIS dyall.cv3z
+       53.    1
+I     0.0000000000   0.0000000000   1.9000000000
+LARGE BASIS dyall.cv3z
+FINISH
+</pre>
+</details>
+
+<details class="my-1">
+  <summary><strong>Test-5.inp</strong></summary>
+  <pre style="color:#0d6efd; background:#f9f9f9; border:1px solid #ccc; padding:10px; overflow:auto;">**DIRAC
+.WAVE FUNCTION
+**HAMILTONIAN
+.LVCORR
+**WAVE FUNCTION
+.SCF
+*SCF
+.INTFLG
+1 1 0
+.ERGCNV
+5.0E-9
+**END OF
+</pre>
+</details>
+<div class='row'>
+<div class="col-md-6 text-center">
+        <img src="5.png" class="img-fluid rounded shadow my-3" alt="5.png">
+    </div>
+<div class="col-md-6 text-center">
+        <img src="5_ram_vs_time.png" class="img-fluid rounded shadow my-3" alt="5_ram_vs_time.png">
+    </div>
+</div>
+</div>
+<div class="card my-4 p-3 shadow-sm border rounded">
+
+<details class="my-1">
+  <summary><strong>Test-6.mol</strong></summary>
+  <pre style="color:#0d6efd; background:#f9f9f9; border:1px solid #ccc; padding:10px; overflow:auto;">Geometry taken from
+Puzzarini manuscript (2007)                                                                                                    
+
+C   5              A                                                                                
+        6.    1                                                                                     
+C      0.0000000000  -0.6595320876   1.5014630716                                                   
+LARGE BASIS dyall.cv2z
+       53.    1                                                                                     
+I      0.0000000000   0.0236182694  -0.5218162937                                                   
+LARGE BASIS dyall.cv2z
+        9.    1                                                                                     
+F      0.0000000000   0.3909208978   2.3636086368                                                   
+LARGE BASIS dyall.cv2z
+        1.    1                                                                                     
+H1     0.9017000085  -1.2451331425   1.6364286512                                                   
+LARGE BASIS dyall.cv2z
+        1.    1                                                                                     
+H2    -0.9017000085  -1.2451331425   1.6364286512                                                   
+LARGE BASIS dyall.cv2z
+FINISH  
+</pre>
+</details>
+
+<details class="my-1">
+  <summary><strong>Test-6.inp</strong></summary>
+  <pre style="color:#0d6efd; background:#f9f9f9; border:1px solid #ccc; padding:10px; overflow:auto;">**DIRAC                                                                                             
+.WAVE FUNCTION                                                                                      
+.PROPERTIES                                                                                         
+**HAMILTONIAN                                                                                       
+.URKBAL                                                                                             
+.INTFLG                                                                                             
+1 1 0                                                                                               
+**INTEGRALS                                                                                         
+.NUCMOD                                                                                             
+ 2                                                                                                  
+*READIN                                                                                             
+.UNCONTRACT                                                                                         
+**WAVE FUNCTIONS                                                                                    
+.SCF                                                                                                
+*SCF                                                                                                
+.ERGCNV                                                                                             
+5.0E-9                                                                                              
+.MAXITR                                                                                             
+40                                                                                                  
+**PROPERTIES                                                                                        
+.EFG                                                                                                
+.NQCC   
+*END OF 
+</pre>
+</details>
+<div class='row'>
+<div class="col-md-6 text-center">
+        <img src="6.png" class="img-fluid rounded shadow my-3" alt="6.png">
+    </div>
+<div class="col-md-6 text-center">
+        <img src="6_ram_vs_time.png" class="img-fluid rounded shadow my-3" alt="6_ram_vs_time.png">
+    </div>
+</div>
+</div>
+<div class="card my-4 p-3 shadow-sm border rounded">
+
+<details class="my-1">
+  <summary><strong>Test-7.mol</strong></summary>
+  <pre style="color:#0d6efd; background:#f9f9f9; border:1px solid #ccc; padding:10px; overflow:auto;">Geometry taken from
+Aucar manuscript (2021)
+
+C   2              A                                                                                
+       35.    1                                                                                     
+Br    0.0000000000   0.0000000000   2.4675320000                                                    
+LARGE BASIS dyall.cv2z                                                                              
+       53.    1                                                                                     
+I     0.0000000000   0.0000000000   0.0000000000                                                    
+LARGE BASIS dyall.cv2z                                                                              
+FINISH 
+</pre>
+</details>
+
+<details class="my-1">
+  <summary><strong>Test-7.inp</strong></summary>
+  <pre style="color:#0d6efd; background:#f9f9f9; border:1px solid #ccc; padding:10px; overflow:auto;">**DIRAC                                                                                             
+.TITLE                                                                                              
+ Analytical first-order EFG at CCSD level
+.WAVE FUNCTION                                                                                      
+.PROPERTIES                                                                                         
+.4INDEX                                                                                             
+**HAMILTONIAN                                                                                       
+.URKBAL                                                                                             
+.INTFLG                                                                                             
+1 1 0                                                                                               
+**INTEGRALS                                                                                         
+.NUCMOD                                                                                             
+ 2                                                                                                  
+*READIN                                                                                             
+.UNCONTRACT                                                                                         
+**WAVE FUNCTIONS                                                                                    
+.SCF                                                                                                
+.RELCCSD                                                                                            
+*SCF                                                                                                
+.ERGCNV                                                                                             
+5.0E-10                                                                                             
+.MAXITR                                                                                             
+30                                                                                                  
+**PROPERTIES                                                                                        
+.EFG                                                                                                
+.NQCC                                                                                               
+**RELCCSD                                                                                           
+.ENERGY                                                                                             
+.GRADIENT                                                                                           
+*CCFOPR                                                                                             
+.CCSDG                                                                                              
+**MOLTRA                                                                                            
+.ACTIVE                                                                                             
+energy -50000.0 2 0.001                                                                             
+*END OF
+</pre>
+</details>
+<div class='row'>
+<div class="col-md-6 text-center">
+        <img src="7.png" class="img-fluid rounded shadow my-3" alt="7.png">
+    </div>
+<div class="col-md-6 text-center">
+        <img src="7_ram_vs_time.png" class="img-fluid rounded shadow my-3" alt="7_ram_vs_time.png">
+    </div>
+</div>
+</div>
+<div class="card my-4 p-3 shadow-sm border rounded">
+
+<details class="my-1">
+  <summary><strong>Test-8.mol</strong></summary>
+  <pre style="color:#0d6efd; background:#f9f9f9; border:1px solid #ccc; padding:10px; overflow:auto;">Experimental Geometry
+Taken from ...
+
+C   2    0         A
+       35.    1
+Br  0.000  0.000  0.0000
+LARGE BASIS dyall.cv2z
+        1.    1
+H   0.000  0.000  1.4145
+LARGE BASIS dyall.cv2z
+FINISH
+</pre>
+</details>
+
+<details class="my-1">
+  <summary><strong>Test-8.inp</strong></summary>
+  <pre style="color:#0d6efd; background:#f9f9f9; border:1px solid #ccc; padding:10px; overflow:auto;">**DIRAC                                                                                             
+.TITLE                                                                                              
+ shielding                                                                                          
+.WAVE FUNCTION                                                                                      
+.PROPERTIES                                                                                         
+**HAMILTONIAN                                                                                       
+.URKBAL                                                                                             
+.INTFLG                                                                                             
+1 1 0                                                                                               
+**INTEGRALS                                                                                         
+.NUCMOD                                                                                             
+ 1                                                                                                  
+*READIN                                                                                             
+.UNCONTRACT                                                                                         
+**WAVE FUNCTIONS                                                                                    
+.SCF                                                                                                
+*SCF                                                                                                
+.INTFLG                                                                                             
+1 1 0                                                                                               
+.ERGCNV                                                                                             
+5.0E-9                                                                                              
+**PROPERTIES                                                                                        
+.SHIELDING                                                                                          
+*NMR                                                                                                
+.LONDON                                                                                             
+*LINEAR RESPONSE                                                                                    
+.THRESH                                                                                             
+ 1.0D-10                                                                                            
+*END OF  
+</pre>
+</details>
+<div class='row'>
+<div class="col-md-6 text-center">
+        <img src="8.png" class="img-fluid rounded shadow my-3" alt="8.png">
+    </div>
+<div class="col-md-6 text-center">
+        <img src="8_ram_vs_time.png" class="img-fluid rounded shadow my-3" alt="8_ram_vs_time.png">
+    </div>
+</div>
+</div>
+<div class="card my-4 p-3 shadow-sm border rounded">
+
+<details class="my-1">
+  <summary><strong>Test-9.mol</strong></summary>
+  <pre style="color:#0d6efd; background:#f9f9f9; border:1px solid #ccc; padding:10px; overflow:auto;">INTGRL                                                                                              
+H2O2 Taken (and rotated afterwards) from https://pubchem.ncbi.nlm.nih.gov/compound/Hydrogen-Peroxide
+O-O: A -- O-H:  A -- Dihedral angle: 45º                                                           
+C   4    0         A                                                                                
+       8.0    1                                                                                     
+O        0.72470000       0.00000000       0.00000000     Isotope=17                                
+LARGE BASIS dyall.cv3z                                                                              
+       8.0    1                                                                                     
+O       -0.72470000       0.00000000       0.00000000     Isotope=17                                
+LARGE BASIS dyall.cv2z                                                                              
+       1.0    1                                                                                     
+H        0.82330000      -0.91374951      -0.31741390                                               
+LARGE BASIS dyall.cv2z                                                                              
+       1.0    1                                                                                     
+H       -0.82330000      -0.87058524       0.42168324                                               
+LARGE BASIS dyall.cv2z                                                                              
+FINISH   
+</pre>
+</details>
+
+<details class="my-1">
+  <summary><strong>Test-9.inp</strong></summary>
+  <pre style="color:#0d6efd; background:#f9f9f9; border:1px solid #ccc; padding:10px; overflow:auto;">**DIRAC                                                                                             
+.TITLE                                                                                              
+ PVC to EFG                                                                                         
+.WAVE FUNCTION                                                                                      
+.PROPERTIES                                                                                         
+**HAMILTONIAN                                                                                       
+.INTFLG                                                                                             
+1 1 0                                                                                               
+**INTEGRALS                                                                                         
+#.PROPRI                                                                                            
+.NUCMOD                                                                                             
+ 2                                                                                                  
+.SELECT                                                                                             
+ 1                                                                                                  
+ 1                                                                                                  
+*READIN                                                                                             
+.UNCONTRACT                                                                                         
+**WAVE FUNCTIONS                                                                                    
+.SCF                                                                                                
+*SCF                                                                                                
+.INTFLG                                                                                             
+1 1 0                                                                                               
+.ERGCNV                                                                                             
+5.0E-10                                                                                             
+.MAXITR                                                                                             
+100                                                                                                 
+**PROPERTIES                                                                                        
+.PVCEFG                                                                                             
+.PRINT                                                                                              
+ 1                                                                                                  
+*END OF   
+</pre>
+</details>
+<div class='row'>
+<div class="col-md-6 text-center">
+        <img src="9.png" class="img-fluid rounded shadow my-3" alt="9.png">
+    </div>
+<div class="col-md-6 text-center">
+        <img src="9_ram_vs_time.png" class="img-fluid rounded shadow my-3" alt="9_ram_vs_time.png">
+    </div>
+</div>
+</div>
+</div>
+
+</div>
+</body>
+</html>
