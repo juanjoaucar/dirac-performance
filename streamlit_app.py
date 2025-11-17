@@ -1,28 +1,61 @@
 import streamlit as st
-import os
-
-st.title("Visor de HTMLs")
-
-# ---- Descripción editable ----
-st.markdown("""
-### Descripción
-Acá podés escribir una explicación o resumen de lo que muestran los reportes HTML.
-(Colocá el texto que quieras en este bloque.)
-""")
+from pathlib import Path
+import threading
+from fastapi import FastAPI
+from fastapi.staticfiles import StaticFiles
+import uvicorn
+import socket
 
 
+st.set_page_config(layout="wide")
+st.title("Visor de reportes DIRAC")
 
-HTML_DIR = "html"
+HTML_ROOT = Path("static/html")
 
-# listar archivos html
-html_files = [f for f in os.listdir(HTML_DIR) if f.endswith(".html")]
 
-opcion = st.selectbox("Reportes generados por los distintos tipos de procesadores:", html_files)
+def get_free_port():
+    """Devuelve un puerto libre."""
+    s = socket.socket()
+    s.bind(('', 0))
+    port = s.getsockname()[1]
+    s.close()
+    return port
 
-if opcion:
-    archivo_path = os.path.join(HTML_DIR, opcion)
 
-    with open(archivo_path, "r", encoding="utf-8") as f:
-        html_content = f.read()
+@st.cache_resource
+def start_static_server():
+    app = FastAPI()
+    app.mount("/static/html", StaticFiles(directory=HTML_ROOT), name="static-html")
 
-    st.components.v1.html(html_content, height=800, scrolling=True)
+    # elegir puerto dinámicamente
+    port = get_free_port()
+
+    def run():
+        uvicorn.run(app, host="0.0.0.0", port=port, log_level="warning")
+
+    thread = threading.Thread(target=run, daemon=True)
+    thread.start()
+
+    return port  # retornamos el puerto elegido
+
+
+# iniciar servidor estático → devuelve puerto real
+STATIC_PORT = start_static_server()
+
+
+# =========================================================
+# UI
+# =========================================================
+#html_files = list(HTML_ROOT.rglob("*.html")) #de manera recursiva
+html_files = [f for f in HTML_ROOT.glob("*.html")] #de manera no recursiva
+
+choices = [str(f.relative_to(HTML_ROOT)) for f in html_files]
+
+sel = st.sidebar.selectbox("Reportes disponibles:", choices)
+
+url = f"http://localhost:{STATIC_PORT}/static/html/{sel}"
+
+st.markdown(
+    f'<iframe src="{url}" style="width:100%; height:2000px; border:none;"></iframe>',
+    unsafe_allow_html=True
+)
