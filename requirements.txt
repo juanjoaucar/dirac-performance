@@ -1,4 +1,2 @@
 streamlit
-fastapi
-uvicorn[standard]
 beautifulsoup4
