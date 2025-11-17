@@ -1,0 +1,17 @@
+INTGRL                                                                                              
+H2O2 Taken (and rotated afterwards) from https://pubchem.ncbi.nlm.nih.gov/compound/Hydrogen-Peroxide
+O-O: A -- O-H:  A -- Dihedral angle: 45º                                                           
+C   4    0         A                                                                                
+       8.0    1                                                                                     
+O        0.72470000       0.00000000       0.00000000     Isotope=17                                
+LARGE BASIS dyall.cv3z                                                                              
+       8.0    1                                                                                     
+O       -0.72470000       0.00000000       0.00000000     Isotope=17                                
+LARGE BASIS dyall.cv2z                                                                              
+       1.0    1                                                                                     
+H        0.82330000      -0.91374951      -0.31741390                                               
+LARGE BASIS dyall.cv2z                                                                              
+       1.0    1                                                                                     
+H       -0.82330000      -0.87058524       0.42168324                                               
+LARGE BASIS dyall.cv2z                                                                              
+FINISH   

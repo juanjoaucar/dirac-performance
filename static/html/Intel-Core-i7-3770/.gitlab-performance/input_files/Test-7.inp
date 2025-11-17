@@ -1,0 +1,35 @@
+**DIRAC                                                                                             
+.TITLE                                                                                              
+ Analytical first-order EFG at CCSD level
+.WAVE FUNCTION                                                                                      
+.PROPERTIES                                                                                         
+.4INDEX                                                                                             
+**HAMILTONIAN                                                                                       
+.URKBAL                                                                                             
+.INTFLG                                                                                             
+1 1 0                                                                                               
+**INTEGRALS                                                                                         
+.NUCMOD                                                                                             
+ 2                                                                                                  
+*READIN                                                                                             
+.UNCONTRACT                                                                                         
+**WAVE FUNCTIONS                                                                                    
+.SCF                                                                                                
+.RELCCSD                                                                                            
+*SCF                                                                                                
+.ERGCNV                                                                                             
+5.0E-10                                                                                             
+.MAXITR                                                                                             
+30                                                                                                  
+**PROPERTIES                                                                                        
+.EFG                                                                                                
+.NQCC                                                                                               
+**RELCCSD                                                                                           
+.ENERGY                                                                                             
+.GRADIENT                                                                                           
+*CCFOPR                                                                                             
+.CCSDG                                                                                              
+**MOLTRA                                                                                            
+.ACTIVE                                                                                             
+energy -50000.0 2 0.001                                                                             
+*END OF

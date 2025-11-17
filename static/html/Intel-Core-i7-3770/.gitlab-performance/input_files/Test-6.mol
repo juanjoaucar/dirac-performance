@@ -1,0 +1,20 @@
+Geometry taken from
+Puzzarini manuscript (2007)                                                                                                    
+
+C   5              A                                                                                
+        6.    1                                                                                     
+C      0.0000000000  -0.6595320876   1.5014630716                                                   
+LARGE BASIS dyall.cv2z
+       53.    1                                                                                     
+I      0.0000000000   0.0236182694  -0.5218162937                                                   
+LARGE BASIS dyall.cv2z
+        9.    1                                                                                     
+F      0.0000000000   0.3909208978   2.3636086368                                                   
+LARGE BASIS dyall.cv2z
+        1.    1                                                                                     
+H1     0.9017000085  -1.2451331425   1.6364286512                                                   
+LARGE BASIS dyall.cv2z
+        1.    1                                                                                     
+H2    -0.9017000085  -1.2451331425   1.6364286512                                                   
+LARGE BASIS dyall.cv2z
+FINISH  

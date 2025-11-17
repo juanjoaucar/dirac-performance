@@ -1,0 +1,11 @@
+Molecule file for FI
+Arbitrary geometry
+
+C   2    2 Y X     A
+        9.    1
+F     0.0000000000   0.0000000000   0.0000000000
+LARGE BASIS dyall.cv3z
+       53.    1
+I     0.0000000000   0.0000000000   1.9000000000
+LARGE BASIS dyall.cv3z
+FINISH

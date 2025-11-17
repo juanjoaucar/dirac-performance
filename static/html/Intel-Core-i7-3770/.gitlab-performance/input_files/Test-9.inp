@@ -1,0 +1,31 @@
+**DIRAC                                                                                             
+.TITLE                                                                                              
+ PVC to EFG                                                                                         
+.WAVE FUNCTION                                                                                      
+.PROPERTIES                                                                                         
+**HAMILTONIAN                                                                                       
+.INTFLG                                                                                             
+1 1 0                                                                                               
+**INTEGRALS                                                                                         
+#.PROPRI                                                                                            
+.NUCMOD                                                                                             
+ 2                                                                                                  
+.SELECT                                                                                             
+ 1                                                                                                  
+ 1                                                                                                  
+*READIN                                                                                             
+.UNCONTRACT                                                                                         
+**WAVE FUNCTIONS                                                                                    
+.SCF                                                                                                
+*SCF                                                                                                
+.INTFLG                                                                                             
+1 1 0                                                                                               
+.ERGCNV                                                                                             
+5.0E-10                                                                                             
+.MAXITR                                                                                             
+100                                                                                                 
+**PROPERTIES                                                                                        
+.PVCEFG                                                                                             
+.PRINT                                                                                              
+ 1                                                                                                  
+*END OF   

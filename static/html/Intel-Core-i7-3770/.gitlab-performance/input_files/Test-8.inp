@@ -1,0 +1,29 @@
+**DIRAC                                                                                             
+.TITLE                                                                                              
+ shielding                                                                                          
+.WAVE FUNCTION                                                                                      
+.PROPERTIES                                                                                         
+**HAMILTONIAN                                                                                       
+.URKBAL                                                                                             
+.INTFLG                                                                                             
+1 1 0                                                                                               
+**INTEGRALS                                                                                         
+.NUCMOD                                                                                             
+ 1                                                                                                  
+*READIN                                                                                             
+.UNCONTRACT                                                                                         
+**WAVE FUNCTIONS                                                                                    
+.SCF                                                                                                
+*SCF                                                                                                
+.INTFLG                                                                                             
+1 1 0                                                                                               
+.ERGCNV                                                                                             
+5.0E-9                                                                                              
+**PROPERTIES                                                                                        
+.SHIELDING                                                                                          
+*NMR                                                                                                
+.LONDON                                                                                             
+*LINEAR RESPONSE                                                                                    
+.THRESH                                                                                             
+ 1.0D-10                                                                                            
+*END OF  

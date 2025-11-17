@@ -1,0 +1,23 @@
+**DIRAC                                                                                             
+.WAVE FUNCTION                                                                                      
+.PROPERTIES                                                                                         
+**HAMILTONIAN                                                                                       
+.URKBAL                                                                                             
+.INTFLG                                                                                             
+1 1 0                                                                                               
+**INTEGRALS                                                                                         
+.NUCMOD                                                                                             
+ 2                                                                                                  
+*READIN                                                                                             
+.UNCONTRACT                                                                                         
+**WAVE FUNCTIONS                                                                                    
+.SCF                                                                                                
+*SCF                                                                                                
+.ERGCNV                                                                                             
+5.0E-9                                                                                              
+.MAXITR                                                                                             
+40                                                                                                  
+**PROPERTIES                                                                                        
+.EFG                                                                                                
+.NQCC   
+*END OF 

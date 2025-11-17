@@ -1,0 +1,11 @@
+Molecule file for FBr
+
+
+C   2    2 Y X     A
+        9.    1
+F     0.0000000000   0.0000000000   0.0000000000
+LARGE BASIS dyall.cv3z
+       35.    1
+Br    0.0000000000   0.0000000000   1.7148710000
+LARGE BASIS dyall.cv3z
+FINISH
