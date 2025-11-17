@@ -1,0 +1,114 @@
+-- The Fortran compiler identification is IntelLLVM 2025.3.0
+-- The C compiler identification is IntelLLVM 2025.3.0
+-- The CXX compiler identification is IntelLLVM 2025.3.0
+-- Detecting Fortran compiler ABI info
+-- Detecting Fortran compiler ABI info - done
+-- Check for working Fortran compiler: /opt/intel/oneapi/compiler/2025.3/bin/ifx - skipped
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /opt/intel/oneapi/compiler/2025.3/bin/icx - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /opt/intel/oneapi/compiler/2025.3/bin/icpx - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Found Python: /opt/venv/bin/python3.12 (found version "3.12.3") found components: Interpreter
+-- User set explicit MKL flag which is passed to the compiler and linker: -qmkl=parallel
+-- This disables math detection and builtin math libraries
+-- Setting -DHAVE_MKL_BLAS and -DHAVE_MKL_LAPACK
+-- MATH_LIB_SEARCH_ORDER set to MKL;ESSL;OPENBLAS;ATLAS;ACML;SYSTEM_NATIVE
+-- Found OpenMP_C: -fiopenmp (found version "5.1")
+-- Found OpenMP_CXX: -fiopenmp (found version "5.1")
+-- Found OpenMP_Fortran: -fiopenmp (found version "5.2")
+-- Found OpenMP: TRUE (found version "5.1")
+-- Enable profiling: False
+-- Enable run-time checking: False
+-- Configure-time Linked math libs integer compatibility test ENABLED
+-- Performing compile and run test of blas integer size (can deactivate with -D ENABLE_MATH_INT_TEST=OFF) 
+-- Performing Test blas_test_compiled ...
+-- Performing Test blas_test_compiled - Success
+-- Performing Test blas_test_run
+-- Performing Test blas_test_run - Success
+-- Test of blas integer size SUCCESS .. blas is integer*4 
+-- We have BLAS-integer*4
+-- Found HDF5: /usr/lib/x86_64-linux-gnu/hdf5/serial/libhdf5.so;/usr/lib/x86_64-linux-gnu/libcrypto.so;/usr/lib/x86_64-linux-gnu/libcurl.so;/usr/lib/x86_64-linux-gnu/libpthread.a;/usr/lib/x86_64-linux-gnu/libsz.so;/usr/lib/x86_64-linux-gnu/libz.so;/usr/lib/x86_64-linux-gnu/libdl.a;/usr/lib/x86_64-linux-gnu/libm.so (found version "1.10.10") found components: C
+-- HFD5 found, enabling HDF5 interface 
+-- HDF5 include directory location: /usr/include/hdf5/serial 
+-- Set CDash default timeout for single test set to 1500 seconds. Overwritten by test's TIMEOUT property label and, ultimatively, by pam timeout setting.
+-- Test's 'basis_input_scripted' timeout set to 3600 seconds. Can be overwritten by pam's timeout setting.
+-- -qmkl=... flag for MKL libraries kept because Intel Fortran compiler is present
+-- Polarizable Continuum Model via PCMSolver DISABLED
+-- WARNING: Assuming no GPUs present for ExaCorr.
+--   If that is incorrect define shell variable EXA_GPU to AMD or NVIDIA and reconfigure.
+-- Enabling only the TALSH (serial) component of the ExaTENSOR library
+-- The environment variables used to build ExaTensor are collected in the file ExaTensor_ENV (can be inspected/changed if necessary)
+-- Enable ExaTENSOR library: ON
+-- HDF5 Fortran compiler wrapper is unable to compile a minimal HDF5 program.
+-- Found HDF5: /usr/lib/x86_64-linux-gnu/hdf5/serial/libhdf5_fortran.so;/usr/lib/x86_64-linux-gnu/hdf5/serial/libhdf5.so (found version "1.10.10") found components: Fortran
+-- PDE feature not included in PElib, it is only available for GNU compilers.
+-- Using 64-bit real precision.
+-- Using 32-bit integer precision.
+-- Build type: release
+-- Compiler ID: IntelLLVM
+-- System name: Linux
+-- System processor: x86_64
+-- Fortran flags:  -O3 -xHost -w -assume byterecl -g -traceback -DVAR_IFX -fiopenmp -r8
+-- Using Gen1Int integral library.
+-- Host program set to DIRAC.
+-- NOTE: tests for the (e)amfX2C 2e-scalar and spin-orbit picture-change correction module require h5py in your python env!
+-- (e)amfX2C 2e-scalar and spin-orbit picture-change correction module: ON
+-- The XCFun submodule ENABLED
+-- ESR property module: ON
+-- src/reladc/polprp_cousat.F: assigned -O2 optimization flag to fix the compilation with Intel
+-- Stieltjes external module DISABLED
+-- KRCC module: ON
+-- Enable compilation of standalone relccsd.x: OFF
+-- OpenRSP library: OFF
+-- LAO properties without connection matrices: ON
+-- Spinfree MCSCF module: ON
+-- srDFT module: ON
+-- Specialized tutorial tests DISABLED
+-- Unit control tests DISABLED
+-- Found HDF5: /usr/lib/x86_64-linux-gnu/hdf5/serial/libhdf5.so;/usr/lib/x86_64-linux-gnu/libcrypto.so;/usr/lib/x86_64-linux-gnu/libcurl.so;/usr/lib/x86_64-linux-gnu/libpthread.a;/usr/lib/x86_64-linux-gnu/libsz.so;/usr/lib/x86_64-linux-gnu/libz.so;/usr/lib/x86_64-linux-gnu/libdl.a;/usr/lib/x86_64-linux-gnu/libm.so (found version "1.10.10") found components: C HL
+-- User name: root
+-- Host name: runner-vu-uzivwu-project-67998188-concurrent-0
+-- Operating system: Linux-6.2.0-32-generic
+-- CMake version: 4.1.2
+-- CMake generator: Unix Makefiles
+-- CMake build type: release
+-- Configuration time: 2025-10-28 00:05:44.610970+00:00
+-- Fortran compiler ID: IntelLLVM
+-- Fortran compiler: /opt/intel/oneapi/compiler/2025.3/bin/ifx
+-- Fortran compiler version: IntelLLVM 2025.3.0
+-- Fortran compiler flags:  -O3 -xHost -w -assume byterecl -g -traceback -DVAR_IFX -fiopenmp
+-- C compiler ID: IntelLLVM
+-- C compiler: /opt/intel/oneapi/compiler/2025.3/bin/icx
+-- C compiler version: IntelLLVM 2025.3.0
+-- C compiler flags:  -O3 -xHost -g -fiopenmp
+-- CXX compiler ID: IntelLLVM
+-- CXX compiler: /opt/intel/oneapi/compiler/2025.3/bin/icpx
+-- CXX compiler version: IntelLLVM 2025.3.0
+-- CXX compiler flags:  -O3 -xHost -Wno-unknown-pragmas -fiopenmp
+-- Static linking: False
+-- 64-bit integers: False
+-- MPI parallelization: False
+-- Intel MKL flag: parallel
+-- Compile definitions: HAVE_MKL_BLAS;HAVE_MKL_LAPACK;HAVE_OPENMP;SYS_LINUX;PRG_DIRAC;INSTALL_WRKMEM=64000000;EXA_TALSH_ONLY;BUILD_GEN1INT;HAS_PELIB;MOD_LAO_REARRANGED;MOD_MCSCF_spinfree;MOD_XAMFI;MOD_ESR;MOD_KRCC;MOD_SRDFT;MOD_EXACORR
+-- Exacorr module enabled : ON
+-- The Exacorr module will be included in the Dirac executable and to the standalone exacorr.x
+-- Exacorr employs the ExaTensor library (https://github.com/ORNL-QCI/ExaTENSOR) for tensor operations
+-- Please read carefully the Dirac documentation guide for setting up the Exacorr runtime environment
+-- ExaTensor source code repository: https://github.com/RelMBdev/ExaTENSOR.git
+-- Exatensor source code git hash: a1efa9efdcae13caacdc4776af839c3cd1957e85
+-- ExaTensor build environment: WRAP=NOWRAP BUILD_TYPE=OPT EXA_TALSH_ONLY=YES CMAKE_Fortran_COMPILER=/opt/intel/oneapi/compiler/2025.3/bin/ifx CMAKE_C_COMPILER=/opt/intel/oneapi/compiler/2025.3/bin/icx CMAKE_CXX_COMPILER=/opt/intel/oneapi/compiler/2025.3/bin/icpx TOOLKIT=INTEL EXA_OS=LINUX GPU_CUDA=NOCUDA MPILIB=NONE BLASLIB=NONE     
+-- For checking, linked libraries to dirac.x: diracobj;xcfun_fortran_bindings;/builds/gfaym/dirac/build-intelserial-opt/external/xcfun-build/src/libxcfun.a;pelib_interface;gen1int_interface;/builds/gfaym/dirac/build-intelserial-opt/exatensor/src/exatensor/lib/libtalsh.a;laplace;laplace-minimax;qcorr;HDF5::HDF5;-lstdc++ 
+-- Could NOT find Sphinx (missing: SPHINX_EXECUTABLE) 
+-- Copied DIRAC basis set directories into the build directory
+-- Copied data schema and python utilities into the build directory
+-- Set CDash default timeout for single test set to 1500 seconds. Overwritten by test's TIMEOUT property label and, ultimatively, by pam timeout setting.
+-- Test's 'basis_input_scripted' timeout set to 3600 seconds. Can be overwritten by pam's timeout setting.
+-- Configuring done (4.3s)
+-- Generating done (0.9s)
+-- Build files have been written to: /builds/gfaym/dirac/build-intelserial-opt
