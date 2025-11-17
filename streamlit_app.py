@@ -115,8 +115,27 @@ sel_path = ROOT / archivo_map[archivo_sel]
 parent_dir = sel_path.parent
 raw_html = sel_path.read_text(encoding="utf-8")
 
-# Reescribir rutas relativas internas
-html_rewritten = rewrite_paths(raw_html, parent_dir)
+# Reescribir rutas relativas internas (even for Index.html)
+# html_rewritten = rewrite_paths(raw_html, parent_dir)
+
+
+# Solo reescribir rutas si NO es el Index.html del directorio raíz de la categoría
+if sel_path.name != "Index.html":
+    html_rewritten = rewrite_paths(raw_html, parent_dir)
+else:
+    # Mostrar el Index.html tal cual, pero deshabilitar los links visualmente
+    # Inyectamos un estilo CSS
+    disable_links_css = """
+    <style>
+    a {
+        pointer-events: none; /* deshabilita clics */
+        color: gray;          /* opcional: cambiar color para indicar que está deshabilitado */
+        text-decoration: none;
+        cursor: default;
+    }
+    </style>
+    """
+    html_rewritten = disable_links_css + raw_html
 
 # Convertir a data URL
 encoded = base64.b64encode(html_rewritten.encode()).decode()
