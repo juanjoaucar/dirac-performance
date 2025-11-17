@@ -6,13 +6,23 @@ A simple Streamlit app template to visualize several DIRAC performance tests, ru
 
 ### How to run it on your own machine
 
-1. Install the requirements
+1. Create Python virtual environment
+
+   ```
+   $ python -m venv venv_streamlit
+
+2. Activate Python virtual environment
+
+   ```
+   $ source venv_streamlit/bin/activate
+
+3. Install the requirements
 
    ```
    $ pip install -r requirements.txt
    ```
 
-2. Run the app
+4. Run the app
 
    ```
    $ streamlit run streamlit_app.py
