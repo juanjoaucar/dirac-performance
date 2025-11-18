@@ -1,0 +1,1 @@
+./setup --pelib=OFF --exatensor=OFF --pcmsolver=OFF --int64 --mpi --extra-fc-flags="""-O3 -march=native""" --extra-cc-flags="""-O3 -march=native""" --extra-cxx-flags="""-O3 -march=native""" --blas=off --lapack=off --explicit-libs="-L/opt/openblas64/lib -lopenblas" build-openmpi64-opt

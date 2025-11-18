@@ -1,0 +1,1 @@
+./setup --mpi --exatensor=OFF --pcmsolver=OFF --fc=mpiifx --cc=mpiicx --cxx=mpiicpx build-intelmpi-noopt

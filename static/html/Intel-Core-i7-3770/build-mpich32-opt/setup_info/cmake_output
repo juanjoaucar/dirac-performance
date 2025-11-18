@@ -1,0 +1,101 @@
+-- The Fortran compiler identification is GNU 13.3.0
+-- The C compiler identification is GNU 13.3.0
+-- The CXX compiler identification is GNU 13.3.0
+-- Detecting Fortran compiler ABI info
+-- Detecting Fortran compiler ABI info - done
+-- Check for working Fortran compiler: /mpich32-long/bin/mpif90 - skipped
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /mpich32-long/bin/mpicc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /mpich32-long/bin/mpicxx - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Found Python: /opt/venv/bin/python3.12 (found version "3.12.3") found components: Interpreter
+-- MATH_LIB_SEARCH_ORDER set to MKL;ESSL;OPENBLAS;ATLAS;ACML;SYSTEM_NATIVE
+-- Found MPI_C: /mpich32-long/bin/mpicc (found version "4.0")
+-- Found MPI_CXX: /mpich32-long/bin/mpicxx (found version "4.0")
+-- Found MPI_Fortran: /mpich32-long/bin/mpif90 (found version "4.0")
+-- Found MPI: TRUE (found version "4.0")
+-- Found OpenMP_C: -fopenmp (found version "4.5")
+-- Found OpenMP_CXX: -fopenmp (found version "4.5")
+-- Found OpenMP_Fortran: -fopenmp (found version "4.5")
+-- Found OpenMP: TRUE (found version "4.5")
+-- Enable profiling: False
+-- Enable run-time checking: False
+-- Configure-time Linked math libs integer compatibility test ENABLED
+-- Performing compile and run test of blas integer size (can deactivate with -D ENABLE_MATH_INT_TEST=OFF) 
+-- Performing Test blas_test_compiled ...
+-- Performing Test blas_test_compiled - Success
+-- Performing Test blas_test_run
+-- Performing Test blas_test_run - Success
+-- Test of blas integer size SUCCESS .. blas is integer*4 
+-- We have BLAS-integer*4
+-- Found HDF5: /usr/lib/x86_64-linux-gnu/hdf5/serial/libhdf5.so;/usr/lib/x86_64-linux-gnu/libcrypto.so;/usr/lib/x86_64-linux-gnu/libcurl.so;/usr/lib/x86_64-linux-gnu/libpthread.a;/usr/lib/x86_64-linux-gnu/libsz.so;/usr/lib/x86_64-linux-gnu/libz.so;/usr/lib/x86_64-linux-gnu/libdl.a;/usr/lib/x86_64-linux-gnu/libm.so (found version "1.10.10") found components: C
+-- HFD5 found, enabling HDF5 interface 
+-- HDF5 include directory location: /usr/include/hdf5/serial 
+-- MPI package type: MPICH
+-- Compiling /builds/gfaym/dirac/cmake/custom/test-MPI-compiler-compatibility.F90 ...
+-- Performing Test MPI_COMPILER_MATCHES ...
+-- Performing Test MPI_COMPILER_MATCHES - Success
+-- mpi.mod matches the current MPI compiler, employing 'use mpi' and setting -DUSE_MPI_MOD_F90
+-- Compiling /builds/gfaym/dirac/cmake/custom/test-MPI-itype-compatibility.F90 ...
+-- Performing Test MPI_ITYPE_MATCHES ...
+-- Performing Test MPI_ITYPE_MATCHES - Success
+-- Well, program got compiled with 32-bit integers, but the internal MPI integer compatibility test will be performed inside dirac.x.
+-- Set CDash default timeout for single test set to 1500 seconds. Overwritten by test's TIMEOUT property label and, ultimatively, by pam timeout setting.
+-- Test's 'basis_input_scripted' timeout set to 3600 seconds. Can be overwritten by pam's timeout setting.
+-- Polarizable Continuum Model via PCMSolver DISABLED
+-- Enable ExaTENSOR library: OFF
+-- NOTE: tests for the (e)amfX2C 2e-scalar and spin-orbit picture-change correction module require h5py in your python env!
+-- (e)amfX2C 2e-scalar and spin-orbit picture-change correction module: ON
+-- The XCFun submodule ENABLED
+-- ESR property module: ON
+-- Stieltjes external module DISABLED
+-- KRCC module: ON
+-- Enable compilation of standalone relccsd.x: OFF
+-- OpenRSP library: OFF
+-- LAO properties without connection matrices: ON
+-- Spinfree MCSCF module: ON
+-- srDFT module: ON
+-- Specialized tutorial tests DISABLED
+-- Unit control tests DISABLED
+-- Found HDF5: /usr/lib/x86_64-linux-gnu/hdf5/serial/libhdf5.so;/usr/lib/x86_64-linux-gnu/libcrypto.so;/usr/lib/x86_64-linux-gnu/libcurl.so;/usr/lib/x86_64-linux-gnu/libpthread.a;/usr/lib/x86_64-linux-gnu/libsz.so;/usr/lib/x86_64-linux-gnu/libz.so;/usr/lib/x86_64-linux-gnu/libdl.a;/usr/lib/x86_64-linux-gnu/libm.so (found version "1.10.10") found components: C HL
+-- User name: root
+-- Host name: runner-5q3rco021-project-67998188-concurrent-0
+-- Operating system: Linux-5.14.0-626.el9.x86_64
+-- CMake version: 4.1.2
+-- CMake generator: Unix Makefiles
+-- CMake build type: release
+-- Configuration time: 2025-11-17 02:26:11.981590+00:00
+-- Fortran compiler ID: GNU
+-- Fortran compiler: /mpich32-long/bin/mpif90
+-- Fortran compiler version: GNU 13.3.0
+-- Fortran compiler flags:  -O3 -march=native -g -fcray-pointer -fbacktrace -fno-range-check -DVAR_GFORTRAN -DVAR_MFDS -fallow-argument-mismatch  -fopenmp -fno-lto
+-- C compiler ID: GNU
+-- C compiler: /mpich32-long/bin/mpicc
+-- C compiler version: GNU 13.3.0
+-- C compiler flags:  -O3 -march=native -g  -fopenmp -fno-lto
+-- CXX compiler ID: GNU
+-- CXX compiler: /mpich32-long/bin/mpicxx
+-- CXX compiler version: GNU 13.3.0
+-- CXX compiler flags:  -O3 -march=native -g -Wall -Wno-unknown-pragmas -Wno-sign-compare -Woverloaded-virtual -Wwrite-strings -Wno-unused  -fopenmp -fno-lto
+-- Static linking: False
+-- 64-bit integers: False
+-- MPI parallelization: True
+-- MPI launcher: /mpich32-long/bin/mpiexec
+-- Explicit libraries: -L/opt/openblas32/lib -lopenblas
+-- Compile definitions: HAVE_MPI;HAVE_OPENMP;VAR_MPI;VAR_MPI2;USE_MPI_MOD_F90;SYS_LINUX;PRG_DIRAC;INSTALL_WRKMEM=64000000;BUILD_GEN1INT;MOD_LAO_REARRANGED;MOD_MCSCF_spinfree;MOD_XAMFI;MOD_ESR;MOD_KRCC;MOD_SRDFT
+-- Exacorr module enabled : OFF
+-- For checking, linked libraries to dirac.x: diracobj;xcfun_fortran_bindings;/builds/gfaym/dirac/build-mpich32-opt/external/xcfun-build/src/libxcfun.a;gen1int_interface;-L/opt/openblas32/lib -lopenblas;laplace;laplace-minimax;qcorr;HDF5::HDF5 
+-- Could NOT find Sphinx (missing: SPHINX_EXECUTABLE) 
+-- Copied DIRAC basis set directories into the build directory
+-- Copied data schema and python utilities into the build directory
+-- Set CDash default timeout for single test set to 1500 seconds. Overwritten by test's TIMEOUT property label and, ultimatively, by pam timeout setting.
+-- Test's 'basis_input_scripted' timeout set to 3600 seconds. Can be overwritten by pam's timeout setting.
+-- Configuring done (104.8s)
+-- Generating done (42.9s)
+-- Build files have been written to: /builds/gfaym/dirac/build-mpich32-opt
