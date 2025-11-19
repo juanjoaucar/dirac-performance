@@ -12,6 +12,7 @@ from comparison.tables import render_static_table, render_selection_table
 from comparison.graphs import plot_selected_rows
 from utils.explorer import build_categories, sidebar_selector
 from utils.html_loader import load_html_as_data_url
+from utils.file_utils import zip_integrity
 
 
 # Configuración de la página
@@ -33,6 +34,13 @@ This Streamlit application is designed to visualize DIRAC performance reports ge
 - For each test, a Time vs. Number of cores graph (left) and a RAM vs. Number of cores graph (right).
 
 The performance tests are executed individually on CPUs without other demanding processes active, ensuring the reliability of the results.
+"""
+
+# Expander text about uploading reports
+index_expander_uploads = """
+New reports can be uploaded using the sidebar tool at the bottom.
+Simply upload a ZIP file containing the report folder, and it will be extracted into the appropriate location for viewing within the application.
+Make sure the ZIP file maintains the correct structure for the reports to be properly recognized.
 """
 
 # Disable links for imported Index.html files
@@ -199,7 +207,23 @@ if activar_build_comp:
 is_index = sel_path.name == "Index.html"
 if is_index:
     st.expander("DIRAC performances reports", expanded=True).markdown(index_expander_content)
+    st.expander("How to upload new reports", expanded=False).markdown(index_expander_uploads)
 
 data_url = load_html_as_data_url(sel_path, is_index)
 st.markdown(f'<iframe src="{data_url}" style="width:100%; height:2000px; border:none;"></iframe>', unsafe_allow_html=True)
 
+
+
+# =============================================================================
+#  Upload new report from zip file (drag & drop)
+# =============================================================================
+st.sidebar.write("### Upload a new Report")
+uploaded_zip = st.sidebar.file_uploader(
+    "Drag & drop a ZIP with your report folder",
+    type=["zip"],
+    key="upload_report_zip"
+)
+
+# (Structure) validation is missing
+if uploaded_zip is not None:
+    zip_integrity(uploaded_zip, ROOT)

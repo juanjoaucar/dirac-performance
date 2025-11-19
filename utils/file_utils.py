@@ -1,6 +1,8 @@
 from pathlib import Path
 import base64
 import re
+import io
+import zipfile
 
 def file_to_data_url(path: Path) -> str:
     mime = {
@@ -43,3 +45,23 @@ def rewrite_paths(html: str, parent_dir: Path) -> str:
         return match.group(0)
 
     return re.sub(pattern, repl, html)
+
+
+
+def zip_integrity(uploaded_zip, ROOT) -> bool:
+    try:
+        zip_bytes = io.BytesIO(uploaded_zip.read())
+        with zipfile.ZipFile(zip_bytes, "r") as zip_ref:
+            # Test integrity of the ZIP file
+            bad_file = zip_ref.testzip()
+            if bad_file:
+                st.error(f"The ZIP file is corrupted. Problem at {bad_file}")
+            else:
+                zip_ref.extractall(ROOT)
+                st.success(f"Report uploaded and extracted to {ROOT}")
+                st.rerun()
+
+    except zipfile.BadZipFile:
+        st.error("The uploaded file is not a valid ZIP.")
+    except EOFError:
+        st.error("The ZIP file is incomplete or corrupted.")
