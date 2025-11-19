@@ -5,6 +5,9 @@ import base64
 import re
 from collections import defaultdict
 
+import io
+import zipfile
+
 
 
 from comparison.loader import load_csvs, load_and_normalize
@@ -217,6 +220,12 @@ st.markdown(f'<iframe src="{data_url}" style="width:100%; height:2000px; border:
 # =============================================================================
 #  Upload new report from zip file (drag & drop)
 # =============================================================================
+
+import shutil
+from pathlib import Path
+
+
+
 st.sidebar.write("### Upload a new Report")
 uploaded_zip = st.sidebar.file_uploader(
     "Drag & drop a ZIP with your report folder",
@@ -224,6 +233,33 @@ uploaded_zip = st.sidebar.file_uploader(
     key="upload_report_zip"
 )
 
-# (Structure) validation is missing
 if uploaded_zip is not None:
-    zip_integrity(uploaded_zip, ROOT)
+    zip_bytes = io.BytesIO(uploaded_zip.read())
+    zip_name=zipfile.ZipFile(zip_bytes).namelist()[0]
+    zip_integrity(zip_bytes, ROOT) # (Structure) validation is missing
+
+
+
+# =============================================================================
+#  Clean uploaded temporary reports
+# =============================================================================
+if st.sidebar.button("Clean uploaded reports"):
+    tmp_dirs = st.session_state.get("uploaded_tmp_dirs", [])
+
+    if not tmp_dirs:
+        st.sidebar.info("No temporary uploaded reports to remove.")
+    else:
+        removed = []
+        for cpu_dir in tmp_dirs:
+            folder_path = ROOT / cpu_dir
+            if folder_path.exists() and folder_path.is_dir():
+                shutil.rmtree(folder_path)
+                removed.append(str(folder_path))
+
+        if removed:
+            st.sidebar.success(f"✅ Removed temporary reports:\n- " + "\n- ".join(removed))
+        else:
+            st.sidebar.warning("No matching folders were found to remove.")
+
+        # Clean list of uploaded temporary directories
+        st.session_state["uploaded_tmp_dirs"] = []

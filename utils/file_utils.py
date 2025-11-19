@@ -3,6 +3,7 @@ import base64
 import re
 import io
 import zipfile
+import streamlit as st
 
 def file_to_data_url(path: Path) -> str:
     mime = {
@@ -48,9 +49,8 @@ def rewrite_paths(html: str, parent_dir: Path) -> str:
 
 
 
-def zip_integrity(uploaded_zip, ROOT) -> bool:
+def zip_integrity(zip_bytes: io.BytesIO, ROOT: Path) -> bool:
     try:
-        zip_bytes = io.BytesIO(uploaded_zip.read())
         with zipfile.ZipFile(zip_bytes, "r") as zip_ref:
             # Test integrity of the ZIP file
             bad_file = zip_ref.testzip()
@@ -59,7 +59,16 @@ def zip_integrity(uploaded_zip, ROOT) -> bool:
             else:
                 zip_ref.extractall(ROOT)
                 st.success(f"Report uploaded and extracted to {ROOT}")
-                st.rerun()
+
+                    # Guardar en session_state para limpieza
+                uploaded_tmp_dirs = st.session_state.get("uploaded_tmp_dirs", [])
+                entries = zip_ref.namelist()
+                top_level_dirs = sorted({p.split("/")[0] for p in entries if "/" in p})
+                for d in top_level_dirs:
+                    if d not in uploaded_tmp_dirs:
+                        uploaded_tmp_dirs.append(d)
+                st.session_state["uploaded_tmp_dirs"] = uploaded_tmp_dirs
+
 
     except zipfile.BadZipFile:
         st.error("The uploaded file is not a valid ZIP.")
