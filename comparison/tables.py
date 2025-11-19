@@ -26,7 +26,18 @@ def render_selection_table(df):
     st.write("### Table to generate graphs")
 
     gb = GridOptionsBuilder.from_dataframe(df)
-    gb.configure_selection(selection_mode="multiple", use_checkbox=True)
+
+    # Multiple row selection with checkboxes
+    gb.configure_selection(selection_mode="multiple", use_checkbox=True, suppressRowClickSelection=True)
+    # Activate checkboxes in the first column and header (select all)
+    first_col = df.columns[0]  # Use the first column for checkboxes
+    gb.configure_column(
+        first_col,
+        checkboxSelection=True,
+        headerCheckboxSelection=True,
+        headerCheckboxSelectionFilteredOnly=True
+    )
+
     gb.configure_pagination(enabled=True)
     opts = gb.build()
 
