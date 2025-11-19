@@ -1,8 +1,16 @@
 import streamlit as st
 from pathlib import Path
+
+
 import base64
 import re
 from collections import defaultdict
+
+
+from comparison.loader import load_csvs, load_and_normalize
+from comparison.tables import render_static_table, render_selection_table
+from comparison.graphs import plot_selected_rows
+
 
 # Configuración de la página
 st.set_page_config(layout="wide")
@@ -169,16 +177,7 @@ st.sidebar.write("### Comparison tool")
 activar_comp = st.sidebar.checkbox("Activate", value=False)
 
 if activar_comp:
-    # --- Detect csv files ---
-    csv_paths = list(ROOT.rglob("benchmark_summary.csv"))
-
-    info = []
-    for p in csv_paths:
-        rel = p.relative_to(ROOT)
-        cpu = rel.parts[0]
-        build = rel.parts[1]
-        info.append((cpu, build, p))
-
+    info = load_csvs(ROOT)
     cpus = sorted({cpu for cpu, build, p in info})
     builds = sorted({build for cpu, build, p in info})
 
@@ -199,24 +198,14 @@ if activar_comp:
                 continue
 
 
-### =============================================================================
-### Static table with data
-### =============================================================================
+            tablas.append(load_and_normalize(match[0], cpu))
 
-            df = pd.read_csv(match[0])
-
-            # Fill empty rows, filling with previous values
-            df = df.ffill()
-
-
-            # Normalizar y forzar columnas clave
-            df["CPU"] = cpu
-            df["Test"] = pd.to_numeric(df["Test"], errors="coerce")
-            df["cores"] = pd.to_numeric(df["cores"], errors="coerce")
-
-            tablas.append(df)
+        ### =============================================================================
+        ### Static table with data
+        ### =============================================================================
 
         if tablas:
+            import pandas as pd
             df_all = pd.concat(tablas, ignore_index=True)
 
             # ===============================
@@ -226,91 +215,22 @@ if activar_comp:
                 df_all[["Test", "cores", "CPU", "time [s]", "peak RAM [Mb]"]] # elijo 5 columnas
                 .sort_values(["Test", "cores", "CPU"]) #las ordeno
             )
-            st.write("### Static table")
 
-            # Coloreo
-            import seaborn as sns
-            # Crear paleta de colores suaves (tantos como CPUs haya)
-            cpus = df_sorted["CPU"].unique()
-            palette = sns.color_palette("pastel", len(cpus))
-            color_map = {cpu: palette[i] for i, cpu in enumerate(cpus)}
-            def highlight_cpu(row):
-                color = color_map[row["CPU"]]
-                return [f"background-color: rgba({int(color[0]*255)}, {int(color[1]*255)}, {int(color[2]*255)}, 0.35)"] * len(row)
+            render_static_table(df_sorted)
 
-            styled = (
-                    df_sorted.style
-                    .apply(highlight_cpu, axis=1)
-                    .format({"Test": "{:.0f}","time [s]": "{:.2f}", "peak RAM [Mb]": "{:.1f}"})
-                    )
-            st.dataframe(styled,hide_index=True)
+        # =============================================================================
+        # Table to produce graphs for comparisson
+        # =============================================================================
 
-# =============================================================================
-# Table to produce graphs for comparisson
-# =============================================================================
-
-
-            from st_aggrid import AgGrid, GridOptionsBuilder
-
-            st.write("### Table to generate graphs")
-            # Convertir tu df_sorted a un df sin estilos
-            df_show = df_sorted.copy()
-
-            # Crear opciones de tabla
-            gb = GridOptionsBuilder.from_dataframe(df_show)
-            gb.configure_selection(selection_mode="multiple", use_checkbox=True)
-            gb.configure_pagination(enabled=True)
-            grid_options = gb.build()
-
-            # Mostrar tabla interactiva
-            grid_return = AgGrid(
-                    df_show,
-                    gridOptions=grid_options,
-                    update_mode="MODEL_CHANGED",
-                    theme="streamlit",
-                    height=400,
-                    )
-
-            # Filas seleccionadas
-            sel = grid_return["selected_rows"]
-
-
-            import plotly.express as px
+            sel = render_selection_table(df_sorted)
 
             if sel is not None and len(sel) > 0:
-
-                df_sel = pd.DataFrame(sel)
-
-                tests = df_sel["Test"].unique()
-                if len(tests) > 1:
-                    st.error("Selected rows must belong to the same **Test number**.")
-                    st.stop()
-
-
-                fig = px.bar(
-                        df_sel,
-                        x="cores",
-                        y="time [s]",
-                        color="CPU",
-                        barmode="group",
-                        title="Times for selected rows",
-                        )
-
-                # --- Show only the tics corresponding to the selected numbers of cores ---
-                cores_selected = sorted(df_sel["cores"].unique())
-                fig.update_xaxes(
-                        tickmode="array",
-                        tickvals=cores_selected,
-                        )
-
-                st.plotly_chart(fig, use_container_width=True)
-
-
+                plot_selected_rows(sel)
             else:
                 st.info("Select desired rows to generate the graph for comparison.")
 
 
-        st.stop()   # evitar que cargue el iframe
+        st.stop()   # Avoid iframe loading
 # =============================================================================
 # MOSTRAR EN IFRAME
 # =============================================================================
