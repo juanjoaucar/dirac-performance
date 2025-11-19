@@ -1,15 +1,17 @@
 import streamlit as st
 from pathlib import Path
 
-
 import base64
 import re
 from collections import defaultdict
 
 
+
 from comparison.loader import load_csvs, load_and_normalize
 from comparison.tables import render_static_table, render_selection_table
 from comparison.graphs import plot_selected_rows
+from utils.explorer import build_categories, sidebar_selector
+from utils.html_loader import load_html_as_data_url
 
 
 # Configuración de la página
@@ -45,127 +47,26 @@ a {
 </style>
 """
 
-# =============================================================================
-# UTILIDADES
-# =============================================================================
 
-def file_to_data_url(path: Path) -> str:
-    """Convierte cualquier archivo (HTML, imagen, CSS, etc.) en un data URL."""
-    mime = {
-        ".html": "text/html",
-        ".css": "text/css",
-        ".js": "text/javascript",
-        ".png": "image/png",
-        ".jpg": "image/jpeg",
-        ".jpeg": "image/jpeg",
-        ".gif": "image/gif",
-        ".svg": "image/svg+xml",
-    }.get(path.suffix.lower(), "application/octet-stream")
-    
-    data = path.read_bytes()
-    b64 = base64.b64encode(data).decode()
-    return f"data:{mime};base64,{b64}"
-
-def rewrite_paths(html: str, parent_dir: Path) -> str:
-    """Reescribe rutas relativas (href, src, link rel='stylesheet') a data-URLs."""
-    pattern = r'(href|src)=["\']([^"\']+)["\']'
-    
-    def repl(match):
-        attr = match.group(1)
-        href = match.group(2)
-        
-        # Ignorar rutas absolutas HTTP/HTTPS
-        if href.startswith("http://") or href.startswith("https://"):
-            return match.group(0)
-        
-        # Ruta relativa al archivo actual
-        target = (parent_dir / href).resolve()
-        if target.exists():
-            try:
-                return f'{attr}="{file_to_data_url(target)}"'
-            except Exception:
-                pass
-        return match.group(0)
-    
-    return re.sub(pattern, repl, html)
 
 # =============================================================================
-# EXPLORADOR CON SUBCATEGORÍAS POR CARPETA
+# Explorer sidebar
 # =============================================================================
 
-# Construimos un dict: categoria → lista de archivos
-categorias = defaultdict(list)
-for f in ROOT.rglob("*.html"):
-    rel = f.relative_to(ROOT)
-    categoria = rel.parts[0] if len(rel.parts) > 1 else "(root)"
-    categorias[categoria].append(rel)
-
+categorias = build_categories(ROOT)
 # Ordenar categorías alfabéticamente
-categorias_ordenadas = dict(sorted(categorias.items()))
+categorias_ordenadas = dict(sorted(categorias.items())) # TAL VEZ NO ES NECESARIO
+sel_path = sidebar_selector(categorias_ordenadas, ROOT)
 
-# Sidebar
-st.sidebar.write("### Explorer for specific CPU and build-type")
+st.sidebar.write("### Comparison tool")
+activar_comp = st.sidebar.checkbox("By CPU model", value=False)
+activar_build_comp = st.sidebar.checkbox("By build type", value=False)
 
-# Selección de categoría
-cat_sel = st.sidebar.selectbox(
-    "Reports:",
-    list(categorias_ordenadas.keys())
-)
+# Make sure only one tool is active
+if activar_comp and activar_build_comp:
+    st.sidebar.error("Please activate only one tool at a time.")
+    st.stop()
 
-# Archivos de la categoría seleccionada
-archivos = categorias_ordenadas[cat_sel]
-
-# Mostrar solo el primer nivel de subdirectorio dentro de la categoría
-# Incluye el primer html, cuyos links no funcionan correctamente (no se muestran las imagenes)
-archivo_nombres = []
-for a in archivos:
-    parts = a.parts
-    if len(parts) > 1:
-        # Solo tomar la carpeta que contiene el archivo, no el archivo en sí
-        nombre_mostrar = parts[1]
-    else:
-        nombre_mostrar = a.name
-    archivo_nombres.append(str(nombre_mostrar))
-
-
-# Mapear lo que se muestra → path real
-archivo_map = dict(zip(archivo_nombres, archivos))
-
-
-
-# Selección de archivo
-archivo_sel = st.sidebar.selectbox(
-    "Builds:",
-    archivo_nombres
-)
-
-# Path real del archivo seleccionado
-sel_path = ROOT / archivo_map[archivo_sel]
-
-# =============================================================================
-# CARGAR Y PROCESAR HTML SELECCIONADO
-# =============================================================================
-
-parent_dir = sel_path.parent
-raw_html = sel_path.read_text(encoding="utf-8")
-
-# Reescribir rutas relativas internas (even for Index.html)
-# html_rewritten = rewrite_paths(raw_html, parent_dir)
-
-
-# Reescribir rutas relativas internas (excepto para Index.html), y agregar expander sólo para Index.html
-if sel_path.name != "Index.html":
-    html_rewritten = rewrite_paths(raw_html, parent_dir)
-else:
-    # Insertar expander con contenido predefinido
-    st.expander("DIRAC performances reports", expanded=True).markdown(index_expander_content)
-
-    # Mostrar el Index.html tal cual, pero deshabilitar los links visualmente. Se inyecta un estilo CSS
-    html_rewritten = disable_links_css + raw_html
-
-# Convertir a data URL
-encoded = base64.b64encode(html_rewritten.encode()).decode()
-data_url = f"data:text/html;base64,{encoded}"
 
 
 # =============================================================================
@@ -173,8 +74,6 @@ data_url = f"data:text/html;base64,{encoded}"
 # =============================================================================
 import pandas as pd
 
-st.sidebar.write("### Comparison tool")
-activar_comp = st.sidebar.checkbox("Activate", value=False)
 
 if activar_comp:
     info = load_csvs(ROOT)
@@ -198,7 +97,7 @@ if activar_comp:
                 continue
 
 
-            tablas.append(load_and_normalize(match[0], cpu))
+            tablas.append(load_and_normalize(match[0], cpu, build_sel))
 
         ### =============================================================================
         ### Static table with data
@@ -231,12 +130,76 @@ if activar_comp:
 
 
         st.stop()   # Avoid iframe loading
-# =============================================================================
-# MOSTRAR EN IFRAME
-# =============================================================================
 
-st.markdown(
-    f'<iframe src="{data_url}" style="width:100%; height:2000px; border:none;"></iframe>',
-    unsafe_allow_html=True,
-)
+# =============================================================================
+# Tables and graphs (comparison of builds for a single CPU)
+# =============================================================================
+import pandas as pd
+
+
+if activar_build_comp:
+    info = load_csvs(ROOT)
+    cpus = sorted({cpu for cpu, build, p in info})
+    builds = sorted({build for cpu, build, p in info})
+
+    # Selecciono UN solo CPU
+    cpu_sel = st.sidebar.selectbox("CPU Model:", cpus)
+
+    # Selecciono VARIOS builds
+    builds_sel = st.sidebar.multiselect("Build types:", builds, default=None)
+
+    if builds_sel:
+        st.write(f"## Comparison for CPU: **{cpu_sel}**")
+
+        tablas = []
+
+        for build in builds_sel:
+            match = [p for (cpu_i, build_i, p) in info
+                     if cpu_i == cpu_sel and build_i == build]
+
+            if not match:
+                st.warning(f"There is no CSV file available for CPU {cpu_sel} and build-type {build}")
+                continue
+
+            tablas.append(load_and_normalize(match[0], cpu_sel, build))
+
+        ### =============================================================================
+        ### Static table with data
+        ### =============================================================================
+
+        if tablas:
+            df_all = pd.concat(tablas, ignore_index=True)
+
+            # Orden y columnas elegidas
+            df_sorted = (
+                df_all[["Test", "cores", "CPU", "build", "time [s]", "peak RAM [Mb]"]]
+                .sort_values(["Test", "cores", "build"])
+            )
+
+            render_static_table(df_sorted)
+
+            # =============================================================================
+            # Table to produce graphs for comparison
+            # =============================================================================
+            sel = render_selection_table(df_sorted)
+
+            if sel is not None and len(sel) > 0:
+                plot_selected_rows(sel, color_by="build")
+            else:
+                st.info("Select desired rows to generate the graph for comparison.")
+
+        st.stop()   # Avoid iframe loading
+
+
+
+
+# =============================================================================
+#  HTML viewer
+# =============================================================================
+is_index = sel_path.name == "Index.html"
+if is_index:
+    st.expander("DIRAC performances reports", expanded=True).markdown(index_expander_content)
+
+data_url = load_html_as_data_url(sel_path, is_index)
+st.markdown(f'<iframe src="{data_url}" style="width:100%; height:2000px; border:none;"></iframe>', unsafe_allow_html=True)
 

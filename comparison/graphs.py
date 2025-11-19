@@ -2,7 +2,7 @@ import plotly.express as px
 import streamlit as st
 import pandas as pd
 
-def plot_selected_rows(selected):
+def plot_selected_rows(selected, color_by="CPU"):
     df = pd.DataFrame(selected)
     tests = df["Test"].unique()
 
@@ -16,7 +16,7 @@ def plot_selected_rows(selected):
         df,
         x="cores",
         y="time [s]",
-        color="CPU",
+        color=color_by,
         barmode="group",
         title="Times for selected rows",
     )
