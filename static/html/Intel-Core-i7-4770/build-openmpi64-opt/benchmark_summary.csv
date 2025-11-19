@@ -1,0 +1,28 @@
+Test,Description,Property,N. of Atoms,Method,Basis Functions,Extra Information,cores,time [s],peak RAM [Mb]
+1,Energy with X2C(xamfi). Atomic calculation with 224 basis functions.,Energy,1,X2C(xamfi),224,---,1,5.1,323.5
+,,,,,,,2,5.7,379.9
+,,,,,,,4,4.0,540.1
+2,Energy with X2C(xamfi). Atomic calculation with 612 basis functions.,Energy,1,X2C(xamfi),612,---,1,182.0,401.1
+,,,,,,,2,183.6,479.1
+,,,,,,,4,103.6,743.0
+3,Energy with X2C(xamfi). Molecular calculation with 252 basis functions.,Energy,2,X2C(xamfi),252,---,1,61.5,410.9
+,,,,,,,2,61.2,481.0
+,,,,,,,4,29.1,659.7
+4,Energy with X2C(xamfi)-CCSD. Molecular calculation with 252 basis functions. 122 spinors in active space.,Energy,2,X2C(xamfi)-CCSD,252,122 spinors in active space.,1,214.5,607.1
+,,,,,,,2,183.2,1156.6
+,,,,,,,4,166.8,2251.7
+5,Energy with DHF. Molecular calculation with X basis functions.,Energy,2,DHF,X,---,1,348.1,141.4
+,,,,,,,2,347.2,199.6
+,,,,,,,4,177.8,336.4
+6,EFG with DHF. Molecular calculation with X basis functions.,EFG,5,DHF,X,---,1,314.5,171.8
+,,,,,,,2,303.5,238.8
+,,,,,,,4,146.6,368.3
+7,EFG with CCSD. Molecular calculation with X basis functions. XXX spinors in active space.,EFG,2,CCSD,X,XXX spinors in active space.,1,624.0,1116.2
+,,,,,,,2,614.7,2220.0
+,,,,,,,4,527.3,4388.0
+8,Shielding with DHF. London orbitals. Molecular calculation with X basis functions.,Shielding,2,DHF,X,---,1,109.6,207.7
+,,,,,,,2,111.8,265.7
+,,,,,,,4,64.9,413.7
+9,PVC to EFG with DHF. Molecular calculation with X basis functions.,PVC to EFG,4,DHF,X,---,1,253.1,128.4
+,,,,,,,2,256.9,189.4
+,,,,,,,4,113.0,311.0
