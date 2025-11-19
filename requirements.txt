@@ -1,2 +1,7 @@
 streamlit
 beautifulsoup4
+pandas
+numpy
+plotly
+streamlit-aggrid
+seaborn

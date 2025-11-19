@@ -25,12 +25,15 @@ The reports are generated from [https://gitlab.com/gfaym/dirac/-/tree/performanc
        Index.html
        build-(...)/
          benchmark_report.html
+         benchmark_summary.csv
          *.png
        build-(...)/
          benchmark_report.html
+         benchmark_summary.csv
          *.png
        build-(...)/
          benchmark_report.html
+         benchmark_summary.csv
          *png   ```
 
 4. **Important notes**
