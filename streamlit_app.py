@@ -17,6 +17,11 @@ from utils.explorer import build_categories, sidebar_selector
 from utils.html_loader import load_html_as_data_url
 from utils.file_utils import zip_integrity
 
+from utils.register_visitors import register_visitor
+
+
+# Register visitor and get total visits (and country)
+total_visits , country = register_visitor()
 
 # Configuración de la página
 st.set_page_config(layout="wide")
@@ -77,7 +82,6 @@ activar_build_comp = st.sidebar.checkbox("By build type", value=False)
 if activar_comp and activar_build_comp:
     st.sidebar.error("Please activate only one tool at a time.")
     st.stop()
-
 
 
 # =============================================================================
@@ -263,3 +267,19 @@ if st.sidebar.button("Clean uploaded reports"):
 
         # Clean list of uploaded temporary directories
         st.session_state["uploaded_tmp_dirs"] = []
+
+
+# =============================================================================
+#  Visits info in sidebar
+# =============================================================================
+# ---- Render in sidebar ----
+with st.sidebar:
+    st.markdown("---")
+    st.markdown(
+        f"<div style='font-size:14px; opacity:0.7;'>Visitors: {total_visits}</div>",
+        unsafe_allow_html=True
+    )
+    st.markdown(
+        f"<div style='font-size:12px; opacity:0.7;'>Last visitor from: {country}</div>",
+        unsafe_allow_html=True
+    )

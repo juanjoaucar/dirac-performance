@@ -5,3 +5,5 @@ numpy
 plotly
 streamlit-aggrid
 seaborn
+supabase
+requests
