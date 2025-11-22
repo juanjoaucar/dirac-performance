@@ -23,7 +23,7 @@ def get_country(ip):
 def register_visitor():
     # --- Supabase client ---
     SUPABASE_URL = st.secrets["supabase_url"]
-    SUPABASE_KEY = st.secrets["supabase_key"]
+    SUPABASE_KEY = st.secrets["supabase_anon_key"]
     supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
 
 
