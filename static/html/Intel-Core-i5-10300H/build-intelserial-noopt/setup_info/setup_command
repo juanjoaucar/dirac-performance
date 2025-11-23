@@ -1,0 +1,1 @@
+./setup --pcmsolver=OFF --fc=ifx --cc=icx --cxx=icpx --qmkl=parallel build-intelserial-noopt

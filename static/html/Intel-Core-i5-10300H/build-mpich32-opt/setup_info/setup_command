@@ -1,0 +1,1 @@
+./setup --pelib=OFF --exatensor=OFF --pcmsolver=OFF --mpi --extra-fc-flags="""-O3 -march=native""" --extra-cc-flags="""-O3 -march=native""" --extra-cxx-flags="""-O3 -march=native""" --blas=off --lapack=off --explicit-libs="-L/opt/openblas32/lib -lopenblas" build-mpich32-opt

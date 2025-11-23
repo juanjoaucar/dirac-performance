@@ -1,0 +1,1 @@
+./setup --pcmsolver=OFF --fc=ifx --cc=icx --cxx=icpx --qmkl=parallel --extra-fc-flags="""-O3 -xHost""" --extra-cc-flags="""-O3 -xHost""" --extra-cxx-flags="""-O3 -xHost""" build-intelserial-opt
