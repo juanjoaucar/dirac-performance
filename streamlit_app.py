@@ -13,7 +13,7 @@ import zipfile
 from comparison.loader import load_csvs, load_and_normalize, cpu_model, dirac_version
 from comparison.tables import render_static_table, render_selection_table
 from comparison.graphs import plot_selected_rows
-from utils.explorer import build_categories, sidebar_selector
+from utils.explorer import build_categories, sidebar_selector, builds_index
 from utils.html_loader import load_html_as_data_url
 from utils.file_utils import zip_integrity
 
@@ -40,6 +40,8 @@ This Streamlit application is designed to visualize DIRAC performance reports ge
 - Main files that identify the key characteristics of the build under inspection.
 - A summary table that briefly describes the performance tests and synthesizes their results.
 - For each test, a Time vs. Number of cores graph (left) and a RAM vs. Number of cores graph (right).
+
+In the index of each report ("Index.html" in the Builds selector), each build can be expanded to see how it was built (modules to load and setup/cmake commands) and to open its report.
 
 The performance tests are executed individually on CPUs without other demanding processes active, ensuring the reliability of the results.
 """
@@ -259,9 +261,11 @@ is_index = sel_path.name == "Index.html"
 if is_index:
     st.expander("DIRAC performances reports", expanded=True).markdown(index_expander_content)
     st.expander("How to upload new reports", expanded=False).markdown(index_expander_uploads)
-
-data_url = load_html_as_data_url(sel_path, is_index)
-st.markdown(f'<iframe src="{data_url}" style="width:100%; height:2000px; border:none;"></iframe>', unsafe_allow_html=True)
+    # Native list instead of Index.html: its links cannot work inside the iframe
+    builds_index(sel_path.parent)
+else:
+    data_url = load_html_as_data_url(sel_path, is_index)
+    st.markdown(f'<iframe src="{data_url}" style="width:100%; height:2000px; border:none;"></iframe>', unsafe_allow_html=True)
 
 
 

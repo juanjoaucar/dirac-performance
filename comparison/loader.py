@@ -41,6 +41,24 @@ def dirac_version(build_dir: Path):
     return f"{version} ({date}, {git.get('GIT_COMMIT_HASH', 'unknown')})"
 
 
+BUILD_INFO_KEYS = ["FORTRAN_COMPILER", "FORTRAN_COMPILER_VERSION", "FORTRAN_COMPILER_FLAGS",
+                   "C_COMPILER", "C_COMPILER_VERSION", "C_COMPILER_FLAGS", "CXX_COMPILER", "CXX_COMPILER_FLAGS",
+                   "MATH_LIBS", "ENABLE_MPI", "MPI_LAUNCHER", "ENABLE_64BIT_INTEGERS", "ENABLE_EXATENSOR",
+                   "CMAKE_VERSION", "CMAKE_BUILD_TYPE"]
+
+
+def build_setup(build_dir: Path):
+    """ How a build was made, from setup_info/: setup command, loaded modules and build_info.h values. """
+    info = build_dir / "setup_info"
+    read = lambda name: (info / name).read_text().strip() if (info / name).exists() else ""
+    defines = dict(re.findall(r'^#define (\w+)\s+"(.*)"', read("build_info.h"), re.M))
+    return {
+        "setup_command": read("setup_command"),
+        "modules": read("modules.txt").split(),
+        "build_info": {k: defines[k].strip() for k in BUILD_INFO_KEYS if k in defines},
+    }
+
+
 def load_and_normalize(path, cpu, build_name):
     import pandas as pd
 
