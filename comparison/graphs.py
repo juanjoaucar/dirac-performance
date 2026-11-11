@@ -27,4 +27,4 @@ def plot_selected_rows(selected, color_by="CPU"):
         tickvals=sorted(df["cores"].unique()),
     )
 
-    st.plotly_chart(fig, use_container_width=True)
+    st.plotly_chart(fig)
