@@ -3,13 +3,13 @@ import pandas as pd
 import seaborn as sns
 from st_aggrid import AgGrid, GridOptionsBuilder
 
-def render_static_table(df):
-    cpus = df["CPU"].unique()
+def render_static_table(df, color_by="CPU"):
+    cpus = df[color_by].unique()
     palette = sns.color_palette("pastel", len(cpus))
     color_map = {cpu: palette[i] for i, cpu in enumerate(cpus)}
 
     def highlight(row):
-        c = color_map[row["CPU"]]
+        c = color_map[row[color_by]]
         return [f"background-color: rgba({int(c[0]*255)}, {int(c[1]*255)}, {int(c[2]*255)}, 0.35)"] * len(row)
 
     styled = df.style.apply(highlight, axis=1)

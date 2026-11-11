@@ -10,7 +10,7 @@ import zipfile
 
 
 
-from comparison.loader import load_csvs, load_and_normalize
+from comparison.loader import load_csvs, load_and_normalize, cpu_model, dirac_version
 from comparison.tables import render_static_table, render_selection_table
 from comparison.graphs import plot_selected_rows
 from utils.explorer import build_categories, sidebar_selector
@@ -77,9 +77,10 @@ sel_path = sidebar_selector(categorias_ordenadas, ROOT)
 st.sidebar.write("### Comparison tool")
 activar_comp = st.sidebar.checkbox("By CPU model", value=False)
 activar_build_comp = st.sidebar.checkbox("By build type", value=False)
+activar_version_comp = st.sidebar.checkbox("By DIRAC version", value=False)
 
 # Make sure only one tool is active
-if activar_comp and activar_build_comp:
+if activar_comp + activar_build_comp + activar_version_comp > 1:
     st.sidebar.error("Please activate only one tool at a time.")
     st.stop()
 
@@ -202,6 +203,49 @@ if activar_build_comp:
                 plot_selected_rows(sel, color_by="build")
             else:
                 st.info("Select desired rows to generate the graph for comparison.")
+
+        st.stop()   # Avoid iframe loading
+
+
+# =============================================================================
+# Tables and graphs (comparison of DIRAC versions for a single CPU and build)
+# =============================================================================
+
+if activar_version_comp:
+    info = load_csvs(ROOT)
+    # Each report folder holds one DIRAC version, so the CPU is taken from lscpu.txt, not from the folder name
+    runs = [(cpu_model(p.parent), build, dirac_version(p.parent), p) for cpu, build, p in info]
+
+    cpu_sel = st.sidebar.selectbox("CPU Model:", sorted({cpu for cpu, build, v, p in runs}))
+    build_sel = st.sidebar.selectbox("Type of build", sorted({build for cpu, build, v, p in runs if cpu == cpu_sel}))
+    versions = sorted({v for cpu, build, v, p in runs if cpu == cpu_sel and build == build_sel})
+    versions_sel = st.sidebar.multiselect("DIRAC versions:", versions, default=None)
+
+    if versions_sel:
+        st.write(f"## Comparison for CPU: **{cpu_sel}** and build-type: **{build_sel}**")
+
+        tablas = []
+        for version in versions_sel:
+            match = [p for (cpu_i, build_i, v_i, p) in runs
+                     if cpu_i == cpu_sel and build_i == build_sel and v_i == version]
+            df = load_and_normalize(match[0], cpu_sel, build_sel)
+            df["DIRAC version"] = version
+            tablas.append(df)
+
+        df_all = pd.concat(tablas, ignore_index=True)
+        df_sorted = (
+            df_all[["Test", "cores", "DIRAC version", "time [s]", "peak RAM [Mb]"]]
+            .sort_values(["Test", "cores", "DIRAC version"])
+        )
+
+        render_static_table(df_sorted, color_by="DIRAC version")
+
+        sel = render_selection_table(df_sorted)
+
+        if sel is not None and len(sel) > 0:
+            plot_selected_rows(sel, color_by="DIRAC version")
+        else:
+            st.info("Select desired rows to generate the graph for comparison.")
 
         st.stop()   # Avoid iframe loading
 
