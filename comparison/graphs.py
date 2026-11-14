@@ -28,3 +28,23 @@ def plot_selected_rows(selected, color_by="CPU"):
     )
 
     st.plotly_chart(fig)
+
+    # Efficiency = speedup / cores: 1 at 1 core, 1 if N cores make it N times faster.
+    # Needs each series' own 1-core time, so only series with a 1-core row selected show up.
+    one_core = df[df["cores"] == 1][[color_by, "time [s]"]].rename(columns={"time [s]": "time_1core"})
+    df_eff = df.merge(one_core, on=color_by)
+    df_eff["efficiency"] = df_eff["time_1core"] / (df_eff["time [s]"] * df_eff["cores"])
+
+    fig_eff = px.bar(
+        df_eff,
+        x="cores",
+        y="efficiency",
+        color=color_by,
+        barmode="group",
+        title="Time efficiency for selected rows (x 1 core)",
+    )
+    fig_eff.update_xaxes(
+        tickmode="array",
+        tickvals=sorted(df["cores"].unique()),
+    )
+    st.plotly_chart(fig_eff)
