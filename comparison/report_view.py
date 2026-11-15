@@ -1,0 +1,48 @@
+from pathlib import Path
+import pandas as pd
+import streamlit as st
+
+from .loader import build_setup
+
+
+def render_report_native(build_dir: Path):
+    """ Native Streamlit rendering of one build's report, using Streamlit widgets."""
+    setup = build_setup(build_dir)
+    with st.expander("How it was built", expanded=False):
+        st.code(setup["setup_command"] or "(not recorded)", language="bash")
+        if not setup["modules"]:
+            st.caption("Older report: the environment (Docker image or modules) was not recorded, "
+                       "only the setup command above and the compilers below.")
+        else:
+            st.markdown("**All loaded modules**")
+            st.code("\n".join(setup["modules"]), language=None)
+        if setup["build_info"]:
+            st.markdown("**Compilers and libraries** (build_info.h)")
+            st.dataframe(pd.DataFrame(setup["build_info"].items(), columns=["", "value"]),
+                         hide_index=True)
+
+    df = pd.read_csv(build_dir / "benchmark_summary.csv")
+    text_cols = ["Test", "Description", "Property", "N. of Atoms", "Method",
+                 "Basis Functions", "Extra Information"]
+    df[text_cols] = df[text_cols].ffill()
+    df["Test"] = df["Test"].astype(int)
+    df = df.sort_values(["Test", "cores"])
+
+    st.subheader("Summary table")
+    st.dataframe(df, hide_index=True, width="stretch")
+
+    st.subheader("Plots")
+    for position in sorted(df["Test"].unique()):
+        row = df[df["Test"] == position].iloc[0]
+        st.markdown(f"**Test {position} — {row['Property']}**")
+        st.caption(row["Description"])
+
+        for suffixes in [["", "_efficiency"], ["_ram_vs_time", "_ram_vs_time_factor"]]:
+            imgs = [build_dir / f"{position}{s}.png" for s in suffixes]
+            imgs = [img for img in imgs if img.exists()]
+            if not imgs:
+                continue
+            for col, img in zip(st.columns(len(imgs)), imgs):
+                col.image(str(img), width="stretch")
+
+        st.divider()

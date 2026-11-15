@@ -14,9 +14,8 @@ from comparison.loader import load_csvs, load_and_normalize, cpu_model, dirac_ve
 from comparison.tables import render_static_table, render_selection_table
 from comparison.graphs import plot_selected_rows
 from utils.explorer import build_categories, sidebar_selector, builds_index
-from utils.html_loader import load_report_html
+from comparison.report_view import render_report_native
 from utils.file_utils import zip_integrity
-import streamlit.components.v1 as components
 
 from utils.register_visitors import register_visitor
 
@@ -282,11 +281,9 @@ if is_index:
     # Native list instead of Index.html: its links cannot work inside the iframe
     builds_index(sel_path.parent)
 else:
-    # components.html() uses the iframe's srcdoc, not a data: URL, so it isn't capped
-    # by the browser's ~2MB URL-length limit the way a bigger report (more tests/images
-    # embedded as base64) used to silently hit, leaving the iframe blank.
-    html = load_report_html(sel_path)
-    components.html(html, height=2000, scrolling=True)
+    # Native rendering 
+    # The static benchmark_report.html is still built by html_report.py for GitLab/offline use.
+    render_report_native(sel_path.parent)
 
 
 
