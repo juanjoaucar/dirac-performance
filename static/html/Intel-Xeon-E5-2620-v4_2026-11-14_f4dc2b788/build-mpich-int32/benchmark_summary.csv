@@ -1,0 +1,51 @@
+Test,Description,Property,N. of Atoms,Method,Basis Functions,Extra Information,cores,time [s],peak RAM [Mb]
+1,Energy with X2C(xamfi). Molecular calculation with 250 basis functions.,Energy,2,X2C(xamfi),250,---,1,757.9,568.4
+,,,,,,,2,499.6,684.1
+,,,,,,,4,432.4,1001.9
+,,,,,,,8,157.3,1632.2
+,,,,,,,16,142.6,2836.2
+10,Energy with X2C(xamfi)-CCSD. Molecular calculation with 252 basis functions. 122 spinors in active space.,Energy,2,X2C(xamfi)-CCSD,252,122 spinors in active space.,1,416.9,332.2
+,,,,,,,2,362.2,444.2
+,,,,,,,4,106.2,640.9
+,,,,,,,8,228.7,1041.2
+,,,,,,,16,77.8,1821.5
+2,Energy with DHF. Molecular calculation with X basis functions.,Energy,2,DHF,X,---,1,277.0,727.1
+,,,,,,,2,358.7,1344.0
+,,,,,,,4,454.3,2562.2
+,,,,,,,8,227.9,4978.6
+,,,,,,,16,347.6,9784.4
+3,EFG with DHF. Molecular calculation with X basis functions.,EFG,5,DHF,X,---,1,431.7,264.3
+,,,,,,,2,352.6,387.0
+,,,,,,,4,279.8,641.6
+,,,,,,,8,169.1,1146.1
+,,,,,,,16,67.3,2124.2
+4,EFG with CCSD. Molecular calculation with X basis functions. 63 spinors in active space.,EFG,2,CCSD,X,63 spinors in active space.,1,343.5,314.0
+,,,,,,,2,294.3,426.6
+,,,,,,,4,247.9,655.0
+,,,,,,,8,186.4,1099.4
+,,,,,,,16,71.7,1988.4
+5,Shielding with DHF. London orbitals. Molecular calculation with X basis functions.,Shielding,2,DHF,X,---,1,719.7,950.3
+,,,,,,,2,932.5,1798.1
+,,,,,,,4,751.0,3479.5
+,,,,,,,8,479.9,6794.6
+,,,,,,,16,720.9,13478.9
+6,PVC to EFG with DHF. Molecular calculation with X basis functions.,PVC to EFG,4,DHF,X,---,1,259.3,315.8
+,,,,,,,2,257.1,437.1
+,,,,,,,4,188.4,691.3
+,,,,,,,8,101.2,1202.5
+,,,,,,,16,127.1,2217.8
+7,Energy with DHF-MP2. Molecular calculation with 130 basis functions. 13 occupied spinors in active space.,Energy,2,DHF-MP2,130,"Frozen-core MP2: 13 active occupied spinors, 108 active virtuals, .IJTSK 2 (memory-limited task batching).",1,396.5,239.9
+,,,,,,,2,343.4,386.5
+,,,,,,,4,203.7,646.4
+,,,,,,,8,193.7,1182.2
+,,,,,,,16,126.6,2209.7
+8,Energy with X2C-DFT(PBE0). Molecular calculation with 334 basis functions.,Energy,2,X2C-DFT(PBE0),334,---,1,504.2,297.5
+,,,,,,,2,439.9,385.8
+,,,,,,,4,191.6,848.4
+,,,,,,,8,111.8,1762.7
+,,,,,,,16,102.3,3185.6
+9,"Energy with X2C, open shell. Molecular calculation with 250 basis functions. BrO radical (doublet, 1 unpaired electron).",Energy,2,X2C (open shell),250,Open-shell doublet: .CLOSED SHELL 42 / .OPEN SHELL 1 / 1/2.,1,337.9,436.1
+,,,,,,,2,253.0,476.5
+,,,,,,,4,107.1,658.1
+,,,,,,,8,65.3,1088.6
+,,,,,,,16,38.5,1937.9
