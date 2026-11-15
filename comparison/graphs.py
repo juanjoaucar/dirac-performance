@@ -49,6 +49,18 @@ def plot_selected_rows(selected, color_by="CPU"):
     fig_eff.update_xaxes(type="category")
     st.plotly_chart(fig_eff)
 
+    fig_ram = px.bar(
+        df,
+        x="cores",
+        y="peak RAM [Mb]",
+        color=color_by,
+        barmode="group",
+        title="Peak RAM for selected rows",
+        category_orders={"cores": cores_order},
+    )
+    fig_ram.update_xaxes(type="category")
+    st.plotly_chart(fig_ram)
+
 
 @st.fragment
 def quick_test_picker(df, color_by="CPU", key=None):
