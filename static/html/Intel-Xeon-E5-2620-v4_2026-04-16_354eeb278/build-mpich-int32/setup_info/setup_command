@@ -1,6 +1,0 @@
-# Build mpich-int32 of the DIRAC performance tests (.gitlab-performance/builds.sh)
-# Reproduce it, compiling and running the tests: .gitlab-performance/run_local.sh mpich-int32  (image gnu.sif)
-module load Python/3.14.2-GCCcore-15.2.0 CMake/4.2.1-GCCcore-15.2.0 MPICH/5.0.1-GCC-15.2.0 OpenBLAS/0.3.32-GCC-15.2.0-pthreads HDF5/2.1.1-GCC-15.2.0-serial
-export CC=mpicc CXX=mpicxx FC=mpifort CFLAGS='-O3 -march=native' CXXFLAGS='-O3 -march=native' FFLAGS='-O3 -march=native'
-cmake -S . -B /homeu/juanau/dirac-performance/build-mpich-int32 -DCMAKE_BUILD_TYPE=Release -DENABLE_PELIB=False -DMKL_FLAG=off '-DMATH_LIBS=-lopenblas -lgfortran' -DENABLE_MPI=True -DENABLE_EXATENSOR=False
-cmake --build /homeu/juanau/dirac-performance/build-mpich-int32 -j $(nproc)
