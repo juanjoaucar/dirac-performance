@@ -58,4 +58,7 @@ def quick_test_picker(df, color_by="CPU", key=None):
     tests = sorted(df["Test"].unique().astype(int))  # Test is float64 upstream (pd.to_numeric)
     test_sel = st.segmented_control("Test:", tests, key=key)
     if test_sel is not None:
-        plot_selected_rows(df[df["Test"] == test_sel].to_dict("records"), color_by=color_by)
+        rows = df[df["Test"] == test_sel]
+        # Joined in case a test number means different tests in the compared reports
+        st.markdown(f"**Test {test_sel}:** " + " / ".join(rows["Description"].dropna().unique()))
+        plot_selected_rows(rows.to_dict("records"), color_by=color_by)
