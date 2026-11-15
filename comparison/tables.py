@@ -47,5 +47,6 @@ def render_selection_table(df):
         update_mode="MODEL_CHANGED",
         theme="streamlit",
         height=400,
+        key="selection_table",
     )
     return grid["selected_rows"]

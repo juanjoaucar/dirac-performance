@@ -36,12 +36,15 @@ def render_report_native(build_dir: Path):
     new_test.iloc[0] = False
     border_style = lambda row: ["border-top: 3px solid #0d47a1" if new_test.loc[row.name] else ""
                                  for _ in row]
-    st.table(df.style.apply(border_style, axis=1).hide(axis="index"))
+    styled = (df.style.apply(border_style, axis=1)
+              .format({"time [s]": "{:.1f}", "peak RAM [Mb]": "{:.1f}"})
+              .hide(axis="index"))
+    st.table(styled)
 
     st.subheader("Plots")
     for position in sorted(df["Test"].unique()):
         row = df[df["Test"] == position].iloc[0]
-        st.markdown(f"**Test {position} — {row['Property']}**")
+        st.markdown(f"**Test {position}**")
         st.caption(row["Description"])
 
         for suffixes in [["", "_efficiency"], ["_ram_vs_time", "_ram_vs_time_factor"]]:
