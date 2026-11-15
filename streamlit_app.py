@@ -68,6 +68,26 @@ a {
 
 
 # =============================================================================
+#  Upload new report from zip file (drag & drop)
+# =============================================================================
+# Extraction must happen before build_categories()/sidebar_selector() read ROOT below,
+# otherwise a freshly uploaded report is invisible until the next rerun.
+import shutil
+
+st.sidebar.write("### Upload a new Report")
+uploaded_zip = st.sidebar.file_uploader(
+    "Drag & drop a ZIP with your report folder",
+    type=["zip"],
+    key="upload_report_zip"
+)
+
+if uploaded_zip is not None:
+    zip_bytes = io.BytesIO(uploaded_zip.read())
+    zip_name=zipfile.ZipFile(zip_bytes).namelist()[0]
+    zip_integrity(zip_bytes, ROOT) # (Structure) validation is missing
+
+
+# =============================================================================
 # Explorer sidebar
 # =============================================================================
 
@@ -266,29 +286,6 @@ if is_index:
 else:
     data_url = load_html_as_data_url(sel_path, is_index)
     st.markdown(f'<iframe src="{data_url}" style="width:100%; height:2000px; border:none;"></iframe>', unsafe_allow_html=True)
-
-
-
-# =============================================================================
-#  Upload new report from zip file (drag & drop)
-# =============================================================================
-
-import shutil
-from pathlib import Path
-
-
-
-st.sidebar.write("### Upload a new Report")
-uploaded_zip = st.sidebar.file_uploader(
-    "Drag & drop a ZIP with your report folder",
-    type=["zip"],
-    key="upload_report_zip"
-)
-
-if uploaded_zip is not None:
-    zip_bytes = io.BytesIO(uploaded_zip.read())
-    zip_name=zipfile.ZipFile(zip_bytes).namelist()[0]
-    zip_integrity(zip_bytes, ROOT) # (Structure) validation is missing
 
 
 
