@@ -50,6 +50,7 @@ def plot_selected_rows(selected, color_by="CPU"):
     st.plotly_chart(fig_eff)
 
 
+@st.fragment
 def quick_test_picker(df, color_by="CPU", key=None):
     """ Quick way to compare one whole test (all its cores) without manually
     checking rows in the selection table. """
