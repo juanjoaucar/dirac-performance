@@ -14,8 +14,9 @@ from comparison.loader import load_csvs, load_and_normalize, cpu_model, dirac_ve
 from comparison.tables import render_static_table, render_selection_table
 from comparison.graphs import plot_selected_rows
 from utils.explorer import build_categories, sidebar_selector, builds_index
-from utils.html_loader import load_html_as_data_url
+from utils.html_loader import load_report_html
 from utils.file_utils import zip_integrity
+import streamlit.components.v1 as components
 
 from utils.register_visitors import register_visitor
 
@@ -68,22 +69,19 @@ a {
 
 
 # =============================================================================
-#  Upload new report from zip file (drag & drop)
+#  Extract a previously uploaded report (if any) before reading ROOT below
 # =============================================================================
-# Extraction must happen before build_categories()/sidebar_selector() read ROOT below,
-# otherwise a freshly uploaded report is invisible until the next rerun.
+# A widget's value lives in session_state as soon as the script starts, even before
+# its own st.sidebar.file_uploader(...) call runs further down (kept there so the
+# widget still appears at the bottom of the sidebar). Reading it here instead means
+# the extraction happens before build_categories()/sidebar_selector() read ROOT,
+# otherwise a freshly uploaded report would stay invisible until the next rerun.
 import shutil
 
-st.sidebar.write("### Upload a new Report")
-uploaded_zip = st.sidebar.file_uploader(
-    "Drag & drop a ZIP with your report folder",
-    type=["zip"],
-    key="upload_report_zip"
-)
-
+uploaded_zip = st.session_state.get("upload_report_zip")
 if uploaded_zip is not None:
-    zip_bytes = io.BytesIO(uploaded_zip.read())
-    zip_name=zipfile.ZipFile(zip_bytes).namelist()[0]
+    zip_bytes = io.BytesIO(uploaded_zip.getvalue())
+    zip_name = zipfile.ZipFile(zip_bytes).namelist()[0]
     zip_integrity(zip_bytes, ROOT) # (Structure) validation is missing
 
 
@@ -284,9 +282,23 @@ if is_index:
     # Native list instead of Index.html: its links cannot work inside the iframe
     builds_index(sel_path.parent)
 else:
-    data_url = load_html_as_data_url(sel_path, is_index)
-    st.markdown(f'<iframe src="{data_url}" style="width:100%; height:2000px; border:none;"></iframe>', unsafe_allow_html=True)
+    # components.html() uses the iframe's srcdoc, not a data: URL, so it isn't capped
+    # by the browser's ~2MB URL-length limit the way a bigger report (more tests/images
+    # embedded as base64) used to silently hit, leaving the iframe blank.
+    html = load_report_html(sel_path)
+    components.html(html, height=2000, scrolling=True)
 
+
+
+# =============================================================================
+#  Upload new report from zip file (drag & drop)
+# =============================================================================
+st.sidebar.write("### Upload a new Report")
+st.sidebar.file_uploader(
+    "Drag & drop a ZIP with your report folder",
+    type=["zip"],
+    key="upload_report_zip"
+)
 
 
 # =============================================================================
