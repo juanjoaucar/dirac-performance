@@ -26,10 +26,17 @@ def render_report_native(build_dir: Path):
                  "Basis Functions", "Extra Information"]
     df[text_cols] = df[text_cols].ffill()
     df["Test"] = df["Test"].astype(int)
-    df = df.sort_values(["Test", "cores"])
+    df["N. of Atoms"] = df["N. of Atoms"].astype(int)
+    # reset_index
+    df = df.sort_values(["Test", "cores"]).reset_index(drop=True)
 
     st.subheader("Summary table")
-    st.dataframe(df, hide_index=True, width="stretch")
+    # Dark-blue top border on each new Test's first row.
+    new_test = df["Test"].ne(df["Test"].shift())
+    new_test.iloc[0] = False
+    border_style = lambda row: ["border-top: 3px solid #0d47a1" if new_test.loc[row.name] else ""
+                                 for _ in row]
+    st.table(df.style.apply(border_style, axis=1).hide(axis="index"))
 
     st.subheader("Plots")
     for position in sorted(df["Test"].unique()):
@@ -42,7 +49,13 @@ def render_report_native(build_dir: Path):
             imgs = [img for img in imgs if img.exists()]
             if not imgs:
                 continue
-            for col, img in zip(st.columns(len(imgs)), imgs):
-                col.image(str(img), width="stretch")
+            if len(imgs) == 1:
+                # Keep a lone image (e.g. RAM-vs-time) at the same
+                # half-width size as a pair, centered, instead of stretched across the row.
+                _, mid, _ = st.columns([1, 2, 1])
+                mid.image(str(imgs[0]), width="stretch")
+            else:
+                for col, img in zip(st.columns(len(imgs)), imgs):
+                    col.image(str(img), width="stretch")
 
         st.divider()
