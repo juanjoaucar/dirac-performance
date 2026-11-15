@@ -11,20 +11,22 @@ def plot_selected_rows(selected, color_by="CPU"):
         st.error("Selected rows must belong to the same **Test number**.")
         return
 
+    # cores as category for the x-axis: these are grouped bars to compare one at a
+    # time, not a numeric axis, so they shouldn't spread apart by the actual
+    # core-count gaps. Keep the numeric column too, needed for the efficiency math.
+    cores_order = [str(c) for c in sorted(df["cores"].unique())]
+    df["cores_label"] = df["cores"].astype(str)
+
     # Create the bar chart
     fig = px.bar(
         df,
-        x="cores",
+        x="cores_label",
         y="time [s]",
         color=color_by,
         barmode="group",
         title="Times for selected rows",
-    )
-
-    # --- Show only the tics corresponding to the selected numbers of cores ---
-    fig.update_xaxes(
-        tickmode="array",
-        tickvals=sorted(df["cores"].unique()),
+        category_orders={"cores_label": cores_order},
+        labels={"cores_label": "cores"},
     )
 
     st.plotly_chart(fig)
@@ -37,14 +39,12 @@ def plot_selected_rows(selected, color_by="CPU"):
 
     fig_eff = px.bar(
         df_eff,
-        x="cores",
+        x="cores_label",
         y="efficiency",
         color=color_by,
         barmode="group",
         title="Time efficiency for selected rows (x 1 core)",
-    )
-    fig_eff.update_xaxes(
-        tickmode="array",
-        tickvals=sorted(df["cores"].unique()),
+        category_orders={"cores_label": cores_order},
+        labels={"cores_label": "cores"},
     )
     st.plotly_chart(fig_eff)
