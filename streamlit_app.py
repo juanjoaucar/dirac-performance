@@ -12,7 +12,7 @@ import zipfile
 
 from comparison.loader import load_csvs, load_and_normalize, cpu_model, dirac_version
 from comparison.tables import render_static_table, render_selection_table
-from comparison.graphs import plot_selected_rows
+from comparison.graphs import plot_selected_rows, quick_test_picker
 from utils.explorer import build_categories, sidebar_selector, builds_index
 from comparison.report_view import render_report_native
 from utils.file_utils import zip_integrity
@@ -152,6 +152,8 @@ if activar_comp:
 
             render_static_table(df_sorted)
 
+            quick_test_picker(df_sorted, color_by="CPU", key="quick_test_comp")
+
         # =============================================================================
         # Table to produce graphs for comparisson
         # =============================================================================
@@ -213,6 +215,8 @@ if activar_build_comp:
 
             render_static_table(df_sorted)
 
+            quick_test_picker(df_sorted, color_by="build", key="quick_test_build_comp")
+
             # =============================================================================
             # Table to produce graphs for comparison
             # =============================================================================
@@ -258,6 +262,8 @@ if activar_version_comp:
         )
 
         render_static_table(df_sorted, color_by="DIRAC version")
+
+        quick_test_picker(df_sorted, color_by="DIRAC version", key="quick_test_version_comp")
 
         sel = render_selection_table(df_sorted)
 

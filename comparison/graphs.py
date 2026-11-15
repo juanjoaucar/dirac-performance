@@ -48,3 +48,13 @@ def plot_selected_rows(selected, color_by="CPU"):
     )
     fig_eff.update_xaxes(type="category")
     st.plotly_chart(fig_eff)
+
+
+def quick_test_picker(df, color_by="CPU", key=None):
+    """ Quick way to compare one whole test (all its cores) without manually
+    checking rows in the selection table. """
+    st.write("#### Quick pick: compare one test across all cores")
+    tests = sorted(df["Test"].unique().astype(int))  # Test is float64 upstream (pd.to_numeric)
+    test_sel = st.segmented_control("Test:", tests, key=key)
+    if test_sel is not None:
+        plot_selected_rows(df[df["Test"] == test_sel].to_dict("records"), color_by=color_by)
