@@ -1,7 +1,0 @@
-# Build openmpi-int32 of the DIRAC performance tests (.gitlab-performance/builds.sh)
-# Reproduce it, compiling and running the tests: .gitlab-performance/run_local.sh openmpi-int32  (image gnu.sif)
-# Reference EasyBuild easyconfig: https://github.com/easybuilders/easybuild-easyconfigs/blob/develop/easybuild/easyconfigs/d/DIRAC/DIRAC-26.0-foss-2025a.eb (CMake options; GCC 15.2.0, OpenBLAS instead of FlexiBLAS and serial HDF5)
-module load Python/3.14.2-GCCcore-15.2.0 CMake/4.2.1-GCCcore-15.2.0 OpenMPI/5.0.10-GCC-15.2.0 OpenBLAS/0.3.32-GCC-15.2.0-pthreads HDF5/2.1.1-GCC-15.2.0-serial
-export CC=mpicc CXX=mpicxx FC=mpifort CFLAGS='-O3 -march=native' CXXFLAGS='-O3 -march=native' FFLAGS='-O3 -march=native'
-cmake -S . -B build-openmpi-int32 -DCMAKE_BUILD_TYPE=Release -DENABLE_PELIB=False -DMKL_FLAG=off '-DMATH_LIBS=-lopenblas -lgfortran' -DENABLE_MPI=True -DENABLE_EXATENSOR=False
-cmake --build build-openmpi-int32 -j $(nproc)
