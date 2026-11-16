@@ -1,0 +1,71 @@
+-- CFLAGS is set to '-O3 -xHost'.
+-- CXXFLAGS is set to '-O3 -xHost'.
+-- User set explicit MKL flag which is passed to the compiler and linker: -qmkl=parallel
+-- This disables math detection and builtin math libraries
+-- Setting -DHAVE_MKL_BLAS and -DHAVE_MKL_LAPACK
+-- Enable profiling: OFF
+-- Enable run-time checking: OFF
+-- Configure-time Linked math libs integer compatibility test ENABLED
+-- Performing compile and run test of blas integer size (can deactivate with -D ENABLE_MATH_INT_TEST=OFF) 
+-- Test of blas integer size SUCCESS .. blas is integer*4 
+-- We have BLAS-integer*4
+-- Found HDF5: hdf5-shared (found version "2.1.1") found components: C
+-- HFD5 found, enabling HDF5 interface 
+-- HDF5 include directory location: /opt/eb-intel/software/HDF5/2.1.1-iimpi-2026.1/include 
+-- MPI package type: INTEL
+-- Compiling /homeu/juanau/dirac-performance/.dirac-perf-src/f4dc2b788/cmake/custom/test-MPI-compiler-compatibility.F90 ...
+-- mpi.mod matches the current MPI compiler, employing 'use mpi' and setting -DUSE_MPI_MOD_F90
+-- Compiling /homeu/juanau/dirac-performance/.dirac-perf-src/f4dc2b788/cmake/custom/test-MPI-itype-compatibility.F90 ...
+-- Well, program got compiled with 32-bit integers, but the internal MPI integer compatibility test will be performed inside dirac.x.
+-- Set CDash default timeout for single test set to 1500 seconds. Overwritten by test's TIMEOUT property label and, ultimatively, by pam timeout setting.
+-- -qmkl=... flag for MKL libraries kept because Intel Fortran compiler is present
+-- Polarizable Continuum Model via PCMSolver DISABLED
+-- Enable ExaTENSOR library: False
+-- NOTE: tests for the (e)amfX2C 2e-scalar and spin-orbit picture-change correction module require h5py in your python env!
+-- (e)amfX2C 2e-scalar and spin-orbit picture-change correction module: ON
+-- The XCFun submodule ENABLED
+-- ESR property module: ON
+-- Stieltjes external module DISABLED
+-- KRCC module: ON
+-- Enable compilation of standalone relccsd.x: OFF
+-- OpenRSP library: OFF
+-- LAO properties without connection matrices: ON
+-- Spinfree MCSCF module: ON
+-- srDFT module: ON
+-- Specialized tutorial tests DISABLED
+-- Unit control tests DISABLED
+-- Found HDF5: hdf5-shared (found version "2.1.1") found components: C HL
+-- User name: juanau
+-- Host name: nn6
+-- Operating system: Linux-5.14.0-687.10.1.el9_8.0.1.x86_64
+-- CMake version: 4.2.1
+-- CMake generator: Unix Makefiles
+-- CMake build type: Release
+-- Configuration time: 2026-11-15 16:25:55.466935+00:00
+-- Fortran compiler ID: IntelLLVM
+-- Fortran compiler: /opt/eb-intel/software/impi/2021.17.2-intel-compilers-2025.3.3/mpi/2021.17/bin/mpiifx
+-- Fortran compiler version: IntelLLVM 2025.3.3
+-- Fortran compiler flags: -O3 -xHost -w -assume byterecl -g -traceback -DVAR_IFX  -w -assume byterecl -g -traceback -DVAR_IFX 
+-- C compiler ID: IntelLLVM
+-- C compiler: /opt/eb-intel/software/impi/2021.17.2-intel-compilers-2025.3.3/mpi/2021.17/bin/mpiicx
+-- C compiler version: IntelLLVM 2025.3.3
+-- C compiler flags: -O3 -xHost -g 
+-- CXX compiler ID: IntelLLVM
+-- CXX compiler: /opt/eb-intel/software/impi/2021.17.2-intel-compilers-2025.3.3/mpi/2021.17/bin/mpiicpx
+-- CXX compiler version: IntelLLVM 2025.3.3
+-- CXX compiler flags: -O3 -xHost -Wno-unknown-pragmas 
+-- Static linking: OFF
+-- 64-bit integers: OFF
+-- MPI parallelization: True
+-- MPI launcher: /opt/eb-intel/software/impi/2021.17.2-intel-compilers-2025.3.3/mpi/2021.17/bin/mpiexec
+-- Intel MKL flag: parallel
+-- Compile definitions: HAVE_MKL_BLAS;HAVE_MKL_LAPACK;HAVE_MPI;VAR_MPI;VAR_MPI2;USE_MPI_MOD_F90;SYS_LINUX;PRG_DIRAC;INSTALL_WRKMEM=64000000;BUILD_GEN1INT;MOD_LAO_REARRANGED;MOD_MCSCF_spinfree;MOD_XAMFI;MOD_ESR;MOD_KRCC;MOD_SRDFT
+-- Exacorr module enabled : False
+-- For checking, linked libraries to dirac.x: diracobj;xcfun_fortran_bindings;/homeu/juanau/dirac-performance/.dirac-perf-src/f4dc2b788/build-intel-mpi-int32/external/xcfun-build/src/libxcfun.a;gen1int_interface;laplace;laplace-minimax;qcorr;HDF5::HDF5 
+-- Could NOT find Sphinx (missing: SPHINX_EXECUTABLE) 
+-- Copied DIRAC basis set directories into the build directory
+-- Copied data schema and python utilities into the build directory
+-- Set CDash default timeout for single test set to 1500 seconds. Overwritten by test's TIMEOUT property label and, ultimatively, by pam timeout setting.
+-- Configuring done (13.7s)
+-- Generating done (8.9s)
+-- Build files have been written to: /homeu/juanau/dirac-performance/.dirac-perf-src/f4dc2b788/build-intel-mpi-int32

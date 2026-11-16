@@ -1,0 +1,7 @@
+# Build intel-mpi-int32 of the DIRAC performance tests (.gitlab-performance/builds.sh)
+# Reproduce it, compiling and running the tests: .gitlab-performance/run_local.sh intel-mpi-int32  (image intel.sif)
+# Reference EasyBuild easyconfig: https://github.com/easybuilders/easybuild-easyconfigs/blob/develop/easybuild/easyconfigs/d/DIRAC/DIRAC-26.0-intel-2025a.eb (CMake options; toolchain intel/2026.1 instead of intel/2025a)
+module load Python/3.14.2-GCCcore-15.2.0 CMake/4.2.1-GCCcore-15.2.0 intel/2026.1 HDF5/2.1.1-iimpi-2026.1
+export CC=mpiicx CXX=mpiicpx FC=mpiifx CFLAGS='-O3 -xHost' CXXFLAGS='-O3 -xHost' FFLAGS='-O3 -xHost'
+cmake -S . -B build-intel-mpi-int32 -DCMAKE_BUILD_TYPE=Release -DENABLE_PELIB=False -DMKL_FLAG=parallel -DENABLE_MPI=True -DENABLE_EXATENSOR=False
+cmake --build build-intel-mpi-int32 -j $(nproc)
