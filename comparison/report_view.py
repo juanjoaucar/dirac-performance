@@ -1,8 +1,25 @@
 from pathlib import Path
+import html
+import re
 import pandas as pd
 import streamlit as st
 
 from .loader import build_setup
+
+
+def embedded_inputs(report_html: Path):
+    """ {position: [(file name, content)]}: the Test-N.mol/.inp that html_report.py embedded in each plot card
+    of benchmark_report.html (the report folders have no other copy of them). """
+    inputs = {}
+    if not report_html.exists():
+        return inputs
+    for card in report_html.read_text().split('<div class="card my-4')[1:]:
+        position = re.search(r'src="(\d+)\.png"', card)  # the card's position N, from its N.png plot
+        if position:
+            inputs[int(position[1])] = [
+                (name, html.unescape(text)) for name, text in
+                re.findall(r'<summary><strong>(Test-[^<]+)</strong></summary>\s*<pre[^>]*>(.*?)</pre>', card, re.S)]
+    return inputs
 
 
 def render_report_native(build_dir: Path):
@@ -42,10 +59,14 @@ def render_report_native(build_dir: Path):
     st.table(styled)
 
     st.subheader("Plots")
+    inputs = embedded_inputs(build_dir / "benchmark_report.html")
     for position in sorted(df["Test"].unique()):
         row = df[df["Test"] == position].iloc[0]
         st.markdown(f"**Test {position}**")
         st.caption(row["Description"])
+        for name, text in inputs.get(position, []):
+            with st.expander(name):
+                st.code(text, language=None)
 
         for suffixes in [["", "_efficiency"], ["_ram_vs_time", "_ram_vs_time_factor"]]:
             imgs = [build_dir / f"{position}{s}.png" for s in suffixes]
