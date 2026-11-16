@@ -2,6 +2,8 @@ import plotly.express as px
 import streamlit as st
 import pandas as pd
 
+from .report_view import embedded_inputs, input_expanders
+
 def plot_selected_rows(selected, color_by="CPU"):
     df = pd.DataFrame(selected)
     tests = df["Test"].unique()
@@ -73,4 +75,13 @@ def quick_test_picker(df, color_by="CPU", key=None):
         rows = df[df["Test"] == test_sel]
         # Joined in case a test number means different tests in the compared reports
         st.markdown(f"**Test {test_sel}:** " + " / ".join(rows["Description"].dropna().unique()))
+        # The compared reports usually ran the same inputs: show each different one once, naming whose it
+        # is only when they differ
+        files = {}  # (name, content) -> labels of the reports with it
+        for report, label in rows.drop_duplicates("report")[["report", color_by]].itertuples(index=False):
+            for name, text in embedded_inputs(report / "benchmark_report.html").get(test_sel, []):
+                files.setdefault((name, text), []).append(str(label))
+        names = [name for name, _ in files]
+        input_expanders([(f"{name} ({', '.join(labels)})" if names.count(name) > 1 else name, text)
+                         for (name, text), labels in files.items()])
         plot_selected_rows(rows.to_dict("records"), color_by=color_by)

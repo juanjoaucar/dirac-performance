@@ -8,18 +8,27 @@ from .loader import build_setup
 
 
 def embedded_inputs(report_html: Path):
-    """ {position: [(file name, content)]}: the Test-N.mol/.inp that html_report.py embedded in each plot card
-    of benchmark_report.html (the report folders have no other copy of them). """
+    """ {N: [("Test-N.mol", content), ("Test-N.inp", content)]}: the inputs that html_report.py embedded in each
+    plot card of benchmark_report.html (the report folders have no other copy of them). Named after the test
+    number N: older reports embed them as Test-<N+2>, from before input_files/ was renumbered to match. """
     inputs = {}
     if not report_html.exists():
         return inputs
     for card in report_html.read_text().split('<div class="card my-4')[1:]:
-        position = re.search(r'src="(\d+)\.png"', card)  # the card's position N, from its N.png plot
+        position = re.search(r'src="(\d+)\.png"', card)  # the card's test number N, from its N.png plot
         if position:
-            inputs[int(position[1])] = [
-                (name, html.unescape(text)) for name, text in
-                re.findall(r'<summary><strong>(Test-[^<]+)</strong></summary>\s*<pre[^>]*>(.*?)</pre>', card, re.S)]
+            n = int(position[1])
+            inputs[n] = [(f"Test-{n}.{ext}", html.unescape(text)) for ext, text in
+                         re.findall(r'<summary><strong>Test-[^<]+\.(\w+)</strong></summary>\s*<pre[^>]*>(.*?)</pre>',
+                                    card, re.S)]
     return inputs
+
+
+def input_expanders(inputs):
+    """ One expander per (file name, content), e.g. from embedded_inputs(). """
+    for name, text in inputs:
+        with st.expander(name):
+            st.code(text, language=None)
 
 
 def render_report_native(build_dir: Path):
@@ -64,9 +73,7 @@ def render_report_native(build_dir: Path):
         row = df[df["Test"] == position].iloc[0]
         st.markdown(f"**Test {position}**")
         st.caption(row["Description"])
-        for name, text in inputs.get(position, []):
-            with st.expander(name):
-                st.code(text, language=None)
+        input_expanders(inputs.get(position, []))
 
         for suffixes in [["", "_efficiency"], ["_ram_vs_time", "_ram_vs_time_factor"]]:
             imgs = [build_dir / f"{position}{s}.png" for s in suffixes]

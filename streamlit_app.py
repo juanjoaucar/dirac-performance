@@ -152,7 +152,7 @@ if activar_comp:
 
             render_static_table(df_sorted)
 
-            quick_test_picker(df_sorted.join(df_all["Description"]), color_by="CPU", key="quick_test_comp")
+            quick_test_picker(df_sorted.join(df_all[["Description", "report"]]), color_by="CPU", key="quick_test_comp")
 
         # =============================================================================
         # Table to produce graphs for comparisson
@@ -215,7 +215,7 @@ if activar_build_comp:
 
             render_static_table(df_sorted)
 
-            quick_test_picker(df_sorted.join(df_all["Description"]), color_by="build", key="quick_test_build_comp")
+            quick_test_picker(df_sorted.join(df_all[["Description", "report"]]), color_by="build", key="quick_test_build_comp")
 
             # =============================================================================
             # Table to produce graphs for comparison
@@ -263,7 +263,7 @@ if activar_version_comp:
 
         render_static_table(df_sorted, color_by="DIRAC version")
 
-        quick_test_picker(df_sorted.join(df_all["Description"]), color_by="DIRAC version", key="quick_test_version_comp")
+        quick_test_picker(df_sorted.join(df_all[["Description", "report"]]), color_by="DIRAC version", key="quick_test_version_comp")
 
         sel = render_selection_table(df_sorted)
 

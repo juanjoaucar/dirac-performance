@@ -93,6 +93,7 @@ def load_and_normalize(path, cpu, build_name):
     df = pd.read_csv(path).ffill()
     df["CPU"] = cpu_str
     df["build"] = build_str
+    df["report"] = Path(path).parent   # build folder, for its benchmark_report.html
     df["Test"] = pd.to_numeric(df["Test"], errors="coerce")
     df["cores"] = pd.to_numeric(df["cores"], errors="coerce")
 
